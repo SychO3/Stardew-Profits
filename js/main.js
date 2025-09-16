@@ -746,8 +746,9 @@ function renderGraph() {
 	svg.attr("width", width).style("padding-top", "12px");
 	d3.select(".graph").attr("width", width);
 
-	var yAxis = d3.axisLeft(ax)
-		.tickFormat(d3.format(",s"))
+        var yAxis = d3.axisLeft(ax)
+                .tickFormat(d3.format(","))
+
 		.ticks(16);
 
 	axisY = gAxis.attr("class", "axis")
@@ -1240,8 +1241,9 @@ function updateGraph() {
 	var y = updateScaleY();
 	var ax = updateScaleAxis();
 
-	var yAxis = d3.axisLeft(ax)
-		.tickFormat(d3.format(",s"))
+        var yAxis = d3.axisLeft(ax)
+                .tickFormat(d3.format(","))
+
 		.ticks(16);
 
 	axisY.transition()

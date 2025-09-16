@@ -1,12 +1,11 @@
 /*
  * All data gathered from a modified version of polarstoat/stardew-crop-data
  */
-
 // Crop List
 var crops = {
   "carrot": {
     "name": "胡萝卜",
-    "url": "https://stardewvalleywiki.com/Carrot",
+    "url": "https://zh.stardewvalleywiki.com/胡萝卜",
     "img": "carrot.png",
     "seeds": {
       "sell": 15,
@@ -14,7 +13,7 @@ var crops = {
       "joja": 0,
       "special": 0,
       "specialLoc": "无法购买",
-      "specialUrl": "https://stardewvalleywiki.com/Carrot_Seeds"
+      "specialUrl": "https://zh.stardewvalleywiki.com/胡萝卜种子"
     },
     "growth": {
       "initial": 3,
@@ -30,7 +29,7 @@ var crops = {
   },
   "summersquash": {
     "name": "金皮西葫芦",
-    "url": "https://stardewvalleywiki.com/Summer_Squash",
+    "url": "https://zh.stardewvalleywiki.com/金皮西葫芦",
     "img": "summersquash.png",
     "seeds": {
       "sell": 20,
@@ -38,7 +37,7 @@ var crops = {
       "joja": 0,
       "special": 0,
       "specialLoc": "无法购买",
-      "specialUrl": "https://stardewvalleywiki.com/Summer_Squash_Seeds"
+      "specialUrl": "https://zh.stardewvalleywiki.com/金皮西葫芦种子"
     },
     "growth": {
       "initial": 6,
@@ -54,7 +53,7 @@ var crops = {
   },
   "broccoli": {
     "name": "西蓝花",
-    "url": "https://stardewvalleywiki.com/Broccoli",
+    "url": "https://zh.stardewvalleywiki.com/西蓝花",
     "img": "broccoli.png",
     "seeds": {
       "sell": 40,
@@ -62,7 +61,7 @@ var crops = {
       "joja": 0,
       "special": 0,
       "specialLoc": "无法购买",
-      "specialUrl": "https://stardewvalleywiki.com/Broccoli_Seeds"
+      "specialUrl": "https://zh.stardewvalleywiki.com/西蓝花种子"
     },
     "growth": {
       "initial": 8,
@@ -78,7 +77,7 @@ var crops = {
   },
   "powdermelon": {
     "name": "霜瓜",
-    "url": "https://stardewvalleywiki.com/Powdermelon",
+    "url": "https://zh.stardewvalleywiki.com/霜瓜",
     "img": "powdermelon.png",
     "seeds": {
       "sell": 20,
@@ -86,7 +85,7 @@ var crops = {
       "joja": 0,
       "special": 0,
       "specialLoc": "无法购买",
-      "specialUrl": "https://stardewvalleywiki.com/Powdermelon_Seeds"
+      "specialUrl": "https://zh.stardewvalleywiki.com/霜瓜种子"
     },
     "growth": {
       "initial": 7,
@@ -103,7 +102,7 @@ var crops = {
   },
   "amaranth": {
     "name": "苋菜",
-    "url": "http://stardewvalleywiki.com/Amaranth",
+    "url": "https://zh.stardewvalleywiki.com/苋菜",
     "img": "amaranth.png",
     "seeds": {
       "sell": 35,
@@ -127,7 +126,7 @@ var crops = {
   },
   "grape": {
     "name": "葡萄",
-    "url": "http://stardewvalleywiki.com/Grape",
+    "url": "https://zh.stardewvalleywiki.com/葡萄",
     "img": "grape.png",
     "seeds": {
       "sell": 30,
@@ -152,7 +151,7 @@ var crops = {
   },
   "hops": {
     "name": "啤酒花",
-    "url": "http://stardewvalleywiki.com/Hops",
+    "url": "https://zh.stardewvalleywiki.com/啤酒花",
     "img": "hops.png",
     "seeds": {
       "sell": 30,
@@ -177,7 +176,7 @@ var crops = {
   },
   "pineapple": {
     "name": "菠萝",
-    "url": "http://stardewvalleywiki.com/Pineapple",
+    "url": "https://zh.stardewvalleywiki.com/菠萝",
     "img": "pineapple.png",
     "seeds": {
       "sell": 240,
@@ -185,7 +184,7 @@ var crops = {
       "joja": 0,
       "special": 400,
       "specialLoc": "岛上商人",
-      "specialUrl": "http://stardewvalleywiki.com/Island_Trader"
+      "specialUrl": "https://zh.stardewvalleywiki.com/姜岛商人"
     },
     "growth": {
       "initial": 14,
@@ -202,7 +201,7 @@ var crops = {
   },
   "sweetgemberry": {
     "name": "宝石甜莓",
-    "url": "http://stardewvalleywiki.com/Sweet_Gem_Berry",
+    "url": "https://zh.stardewvalleywiki.com/宝石甜莓",
     "img": "sweetgemberry.png",
     "seeds": {
       "sell": 200,
@@ -210,7 +209,7 @@ var crops = {
       "joja": 0,
       "special": 1000,
       "specialLoc": "流动商人",
-      "specialUrl": "http://stardewvalleywiki.com/Travelling_Cart"
+      "specialUrl": "https://zh.stardewvalleywiki.com/旅行货车"
     },
     "growth": {
       "initial": 24,
@@ -224,7 +223,7 @@ var crops = {
   },
   "tealeaves": {
     "name": "茶叶",
-    "url": "http://stardewvalleywiki.com/Tea_Leaves",
+    "url": "https://zh.stardewvalleywiki.com/茶叶",
     "img": "tealeaves.png",
     "seeds": {
       "sell": 0,
@@ -232,7 +231,7 @@ var crops = {
       "joja": 0,
       "special": 2500,
       "specialLoc": "流动商人",
-      "specialUrl": "http://stardewvalleywiki.com/Travelling_Cart"
+      "specialUrl": "https://zh.stardewvalleywiki.com/旅行货车"
     },
     "growth": {
       "initial": 20,
@@ -249,7 +248,7 @@ var crops = {
   },
   "fairyrose": {
     "name": "仙女玫瑰",
-    "url": "http://stardewvalleywiki.com/Fairy_Rose",
+    "url": "https://zh.stardewvalleywiki.com/仙女玫瑰",
     "img": "fairyrose.png",
     "seeds": {
       "sell": 100,
@@ -271,7 +270,7 @@ var crops = {
   },
   "tulip": {
     "name": "郁金香",
-    "url": "http://stardewvalleywiki.com/Tulip",
+    "url": "https://zh.stardewvalleywiki.com/郁金香",
     "img": "tulip.png",
     "seeds": {
       "sell": 10,
@@ -293,7 +292,7 @@ var crops = {
   },
   "bluejazz": {
     "name": "蓝爵",
-    "url": "http://stardewvalleywiki.com/Blue_Jazz",
+    "url": "https://zh.stardewvalleywiki.com/蓝爵",
     "img": "bluejazz.png",
     "seeds": {
       "sell": 15,
@@ -315,7 +314,7 @@ var crops = {
   },
   "sunflower": {
     "name": "向日葵",
-    "url": "http://stardewvalleywiki.com/Sunflower",
+    "url": "https://zh.stardewvalleywiki.com/向日葵",
     "img": "sunflower.png",
     "seeds": {
       "sell": 20,
@@ -337,7 +336,7 @@ var crops = {
   },
   "coffeebean": {
     "name": "咖啡豆",
-    "url": "http://stardewvalleywiki.com/Coffee_Bean",
+    "url": "https://zh.stardewvalleywiki.com/咖啡豆",
     "img": "coffeebean.png",
     "seeds": {
       "sell": 0,
@@ -345,7 +344,7 @@ var crops = {
       "joja": 0,
       "special": 2500,
       "specialLoc": "流动商人",
-      "specialUrl": "http://stardewvalleywiki.com/Travelling_Cart"
+      "specialUrl": "https://zh.stardewvalleywiki.com/旅行货车"
     },
     "growth": {
       "initial": 10,
@@ -361,7 +360,7 @@ var crops = {
   },
   "poppy": {
     "name": "虞美人",
-    "url": "http://stardewvalleywiki.com/Poppy",
+    "url": "https://zh.stardewvalleywiki.com/虞美人",
     "img": "poppy.png",
     "seeds": {
       "sell": 50,
@@ -383,7 +382,7 @@ var crops = {
   },
   "summerspangle": {
     "name": "夏季亮片花",
-    "url": "http://stardewvalleywiki.com/Summer_Spangle",
+    "url": "https://zh.stardewvalleywiki.com/夏季亮片花",
     "img": "summerspangle.png",
     "seeds": {
       "sell": 25,
@@ -405,7 +404,7 @@ var crops = {
   },
   "parsnip": {
     "name": "防风草",
-    "url": "http://stardewvalleywiki.com/Parsnip",
+    "url": "https://zh.stardewvalleywiki.com/防风草",
     "img": "parsnip.png",
     "seeds": {
       "sell": 10,
@@ -429,7 +428,7 @@ var crops = {
   },
   "greenbean": {
     "name": "青豆",
-    "url": "http://stardewvalleywiki.com/Green_Bean",
+    "url": "https://zh.stardewvalleywiki.com/青豆",
     "img": "greenbean.png",
     "seeds": {
       "sell": 30,
@@ -453,7 +452,7 @@ var crops = {
   },
   "cauliflower": {
     "name": "花椰菜",
-    "url": "http://stardewvalleywiki.com/Cauliflower",
+    "url": "https://zh.stardewvalleywiki.com/花椰菜",
     "img": "cauliflower.png",
     "seeds": {
       "sell": 40,
@@ -477,7 +476,7 @@ var crops = {
   },
   "potato": {
     "name": "土豆",
-    "url": "http://stardewvalleywiki.com/Potato",
+    "url": "https://zh.stardewvalleywiki.com/土豆",
     "img": "potato.png",
     "seeds": {
       "sell": 25,
@@ -501,7 +500,7 @@ var crops = {
   },
   "garlic": {
     "name": "大蒜",
-    "url": "http://stardewvalleywiki.com/Garlic",
+    "url": "https://zh.stardewvalleywiki.com/大蒜",
     "img": "garlic.png",
     "seeds": {
       "sell": 20,
@@ -525,7 +524,7 @@ var crops = {
   },
   "taroroot": {
     "name": "芋头",
-    "url": "http://stardewvalleywiki.com/Taro_Root",
+    "url": "https://zh.stardewvalleywiki.com/芋头",
     "img": "taroroot.png",
     "seeds": {
       "sell": 20,
@@ -533,7 +532,7 @@ var crops = {
       "joja": 0,
       "special": 24,
       "specialLoc": "岛上商人",
-      "specialUrl": "http://stardewvalleywiki.com/Island_Trader"
+      "specialUrl": "https://zh.stardewvalleywiki.com/姜岛商人"
     },
     "growth": {
       "initial": 10,
@@ -549,7 +548,7 @@ var crops = {
   },
   "kale": {
     "name": "羽衣甘蓝",
-    "url": "http://stardewvalleywiki.com/Kale",
+    "url": "https://zh.stardewvalleywiki.com/羽衣甘蓝",
     "img": "kale.png",
     "seeds": {
       "sell": 35,
@@ -573,7 +572,7 @@ var crops = {
   },
   "unmilledrice": {
     "name": "未碾米",
-    "url": "http://stardewvalleywiki.com/Unmilled_Rice",
+    "url": "https://zh.stardewvalleywiki.com/未碾米",
     "img": "unmilledrice.png",
     "seeds": {
       "sell": 20,
@@ -581,7 +580,7 @@ var crops = {
       "joja": 0,
       "special": 1000,
       "specialLoc": "流动商人",
-      "specialUrl": "http://stardewvalleywiki.com/Travelling_Cart"
+      "specialUrl": "https://zh.stardewvalleywiki.com/旅行货车"
     },
     "growth": {
       "initial": 8,
@@ -597,7 +596,7 @@ var crops = {
   },
   "rhubarb": {
     "name": "大黄",
-    "url": "http://stardewvalleywiki.com/Rhubarb",
+    "url": "https://zh.stardewvalleywiki.com/大黄",
     "img": "rhubarb.png",
     "seeds": {
       "sell": 50,
@@ -605,7 +604,7 @@ var crops = {
       "joja": 0,
       "special": 100,
       "specialLoc": "绿洲",
-      "specialUrl": "http://stardewvalleywiki.com/Oasis"
+      "specialUrl": "https://zh.stardewvalleywiki.com/绿洲"
     },
     "growth": {
       "initial": 13,
@@ -622,7 +621,7 @@ var crops = {
   },
   "melon": {
     "name": "甜瓜",
-    "url": "http://stardewvalleywiki.com/Melon",
+    "url": "https://zh.stardewvalleywiki.com/甜瓜",
     "img": "melon.png",
     "seeds": {
       "sell": 40,
@@ -647,7 +646,7 @@ var crops = {
   },
   "tomato": {
     "name": "番茄",
-    "url": "http://stardewvalleywiki.com/Tomato",
+    "url": "https://zh.stardewvalleywiki.com/番茄",
     "img": "tomato.png",
     "seeds": {
       "sell": 25,
@@ -671,7 +670,7 @@ var crops = {
   },
   "blueberry": {
     "name": "蓝莓",
-    "url": "http://stardewvalleywiki.com/Blueberry",
+    "url": "https://zh.stardewvalleywiki.com/蓝莓",
     "img": "blueberry.png",
     "seeds": {
       "sell": 40,
@@ -696,7 +695,7 @@ var crops = {
   },
   "hotpepper": {
     "name": "辣椒",
-    "url": "http://stardewvalleywiki.com/Hot_Pepper",
+    "url": "https://zh.stardewvalleywiki.com/辣椒",
     "img": "hotpepper.png",
     "seeds": {
       "sell": 20,
@@ -721,7 +720,7 @@ var crops = {
   },
   "wheat": {
     "name": "小麦",
-    "url": "http://stardewvalleywiki.com/Wheat",
+    "url": "https://zh.stardewvalleywiki.com/小麦",
     "img": "wheat.png",
     "seeds": {
       "sell": 5,
@@ -746,7 +745,7 @@ var crops = {
   },
   "radish": {
     "name": "萝卜",
-    "url": "http://stardewvalleywiki.com/Radish",
+    "url": "https://zh.stardewvalleywiki.com/萝卜",
     "img": "radish.png",
     "seeds": {
       "sell": 20,
@@ -770,7 +769,7 @@ var crops = {
   },
   "redcabbage": {
     "name": "红叶卷心菜",
-    "url": "http://stardewvalleywiki.com/Red_Cabbage",
+    "url": "https://zh.stardewvalleywiki.com/红叶卷心菜",
     "img": "redcabbage.png",
     "seeds": {
       "sell": 50,
@@ -794,7 +793,7 @@ var crops = {
   },
   "starfruit": {
     "name": "杨桃",
-    "url": "http://stardewvalleywiki.com/Starfruit",
+    "url": "https://zh.stardewvalleywiki.com/杨桃",
     "img": "starfruit.png",
     "seeds": {
       "sell": 200,
@@ -802,7 +801,7 @@ var crops = {
       "joja": 0,
       "special": 400,
       "specialLoc": "绿洲",
-      "specialUrl": "http://stardewvalleywiki.com/Oasis"
+      "specialUrl": "https://zh.stardewvalleywiki.com/绿洲"
     },
     "growth": {
       "initial": 13,
@@ -819,7 +818,7 @@ var crops = {
   },
   "corn": {
     "name": "玉米",
-    "url": "http://stardewvalleywiki.com/Corn",
+    "url": "https://zh.stardewvalleywiki.com/玉米",
     "img": "corn.png",
     "seeds": {
       "sell": 75,
@@ -843,7 +842,7 @@ var crops = {
   },
   "eggplant": {
     "name": "茄子",
-    "url": "http://stardewvalleywiki.com/Eggplant",
+    "url": "https://zh.stardewvalleywiki.com/茄子",
     "img": "eggplant.png",
     "seeds": {
       "sell": 10,
@@ -867,7 +866,7 @@ var crops = {
   },
   "artichoke": {
     "name": "洋蓟",
-    "url": "http://stardewvalleywiki.com/Artichoke",
+    "url": "https://zh.stardewvalleywiki.com/洋蓟",
     "img": "artichoke.png",
     "seeds": {
       "sell": 15,
@@ -891,7 +890,7 @@ var crops = {
   },
   "pumpkin": {
     "name": "南瓜",
-    "url": "http://stardewvalleywiki.com/Pumpkin",
+    "url": "https://zh.stardewvalleywiki.com/南瓜",
     "img": "pumpkin.png",
     "seeds": {
       "sell": 50,
@@ -915,7 +914,7 @@ var crops = {
   },
   "bokchoy": {
     "name": "小白菜",
-    "url": "http://stardewvalleywiki.com/Bok_Choy",
+    "url": "https://zh.stardewvalleywiki.com/小白菜",
     "img": "bokchoy.png",
     "seeds": {
       "sell": 25,
@@ -939,7 +938,7 @@ var crops = {
   },
   "yam": {
     "name": "山药",
-    "url": "http://stardewvalleywiki.com/Yam",
+    "url": "https://zh.stardewvalleywiki.com/山药",
     "img": "yam.png",
     "seeds": {
       "sell": 30,
@@ -963,7 +962,7 @@ var crops = {
   },
   "cranberries": {
     "name": "蔓越莓",
-    "url": "http://stardewvalleywiki.com/Cranberries",
+    "url": "https://zh.stardewvalleywiki.com/蔓越莓",
     "img": "cranberries.png",
     "seeds": {
       "sell": 60,
@@ -988,7 +987,7 @@ var crops = {
   },
   "beet": {
     "name": "甜菜",
-    "url": "http://stardewvalleywiki.com/Beet",
+    "url": "https://zh.stardewvalleywiki.com/甜菜",
     "img": "beet.png",
     "seeds": {
       "sell": 10,
@@ -996,7 +995,7 @@ var crops = {
       "joja": 0,
       "special": 20,
       "specialLoc": "绿洲",
-      "specialUrl": "http://stardewvalleywiki.com/Oasis"
+      "specialUrl": "https://zh.stardewvalleywiki.com/绿洲"
     },
     "growth": {
       "initial": 6,
@@ -1012,7 +1011,7 @@ var crops = {
   },
   "ancientfruit": {
     "name": "远古水果",
-    "url": "http://stardewvalleywiki.com/Ancient_Fruit",
+    "url": "https://zh.stardewvalleywiki.com/远古水果",
     "img": "ancientfruit.png",
     "seeds": {
       "sell": 30,
@@ -1020,7 +1019,7 @@ var crops = {
       "joja": 0,
       "special": 0,
       "specialLoc": "无法购买",
-      "specialUrl": "https://stardewvalleywiki.com/Ancient_Seeds"
+      "specialUrl": "https://zh.stardewvalleywiki.com/远古种子"
     },
     "growth": {
       "initial": 28,
@@ -1037,7 +1036,7 @@ var crops = {
   },
   "cactusfruit": {
     "name": "仙人掌果",
-    "url": "http://stardewvalleywiki.com/Cactus_Fruit",
+    "url": "https://zh.stardewvalleywiki.com/仙人掌果",
     "img": "cactusfruit.png",
     "seeds": {
       "sell": 0,
@@ -1045,7 +1044,7 @@ var crops = {
       "joja": 0,
       "special": 150,
       "specialLoc": "绿洲",
-      "specialUrl": "http://stardewvalleywiki.com/Oasis"
+      "specialUrl": "https://zh.stardewvalleywiki.com/绿洲"
     },
     "growth": {
       "initial": 12,
@@ -1062,7 +1061,7 @@ var crops = {
   },
   "strawberry": {
     "name": "草莓",
-    "url": "http://stardewvalleywiki.com/Strawberry",
+    "url": "https://zh.stardewvalleywiki.com/草莓",
     "img": "strawberry.png",
     "seeds": {
       "sell": 0,
@@ -1070,7 +1069,7 @@ var crops = {
       "joja": 0,
       "special": 100,
       "specialLoc": "彩蛋节",
-      "specialUrl": "http://stardewvalleywiki.com/Egg_Festival"
+      "specialUrl": "https://zh.stardewvalleywiki.com/蛋节"
     },
     "growth": {
       "initial": 8,
@@ -1087,7 +1086,7 @@ var crops = {
   },
   "springseeds": {
     "name": "春季种子",
-    "url": "http://stardewvalleywiki.com/Spring_Seeds",
+    "url": "https://zh.stardewvalleywiki.com/春季种子",
     "img": "springseeds.png",
     "seeds": {
       "sell": 0,
@@ -1095,7 +1094,7 @@ var crops = {
       "joja": 0,
       "special": 1000,
       "specialLoc": "流动商人",
-      "specialUrl": "http://stardewvalleywiki.com/Travelling_Cart"
+      "specialUrl": "https://zh.stardewvalleywiki.com/旅行货车"
     },
     "growth": {
       "initial": 7,
@@ -1111,7 +1110,7 @@ var crops = {
   },
   "summerseeds": {
     "name": "夏季种子",
-    "url": "http://stardewvalleywiki.com/Summer_Seeds",
+    "url": "https://zh.stardewvalleywiki.com/夏季种子",
     "img": "summerseeds.png",
     "seeds": {
       "sell": 0,
@@ -1119,7 +1118,7 @@ var crops = {
       "joja": 0,
       "special": 1000,
       "specialLoc": "流动商人",
-      "specialUrl": "http://stardewvalleywiki.com/Travelling_Cart"
+      "specialUrl": "https://zh.stardewvalleywiki.com/旅行货车"
     },
     "growth": {
       "initial": 7,
@@ -1137,7 +1136,7 @@ var crops = {
   },
   "fallseeds": {
     "name": "秋季种子",
-    "url": "http://stardewvalleywiki.com/Fall_Seeds",
+    "url": "https://zh.stardewvalleywiki.com/秋季种子",
     "img": "fallseeds.png",
     "seeds": {
       "sell": 0,
@@ -1145,7 +1144,7 @@ var crops = {
       "joja": 0,
       "special": 1000,
       "specialLoc": "流动商人",
-      "specialUrl": "http://stardewvalleywiki.com/Travelling_Cart"
+      "specialUrl": "https://zh.stardewvalleywiki.com/旅行货车"
     },
     "growth": {
       "initial": 7,
@@ -1163,7 +1162,7 @@ var crops = {
   },
   "winterseeds": {
     "name": "冬季种子",
-    "url": "http://stardewvalleywiki.com/Winter_Seeds",
+    "url": "https://zh.stardewvalleywiki.com/冬季种子",
     "img": "winterseeds.png",
     "seeds": {
       "sell": 0,
@@ -1171,7 +1170,7 @@ var crops = {
       "joja": 0,
       "special": 1000,
       "specialLoc": "流动商人",
-      "specialUrl": "http://stardewvalleywiki.com/Travelling_Cart"
+      "specialUrl": "https://zh.stardewvalleywiki.com/旅行货车"
     },
     "growth": {
       "initial": 7,
