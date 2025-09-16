@@ -1,101 +1,100 @@
-﻿
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-		<meta name="description" content="A Stardew Valley crop profits calculator and visualizer." />
-		<title>Stardew Profits - Changes</title>
-		<script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>  
-		<link rel="stylesheet" type="text/css" href="style/style.css" />
-		<link rel="shortcut icon" type="image/png" href="img/ancientfruit.png">
-	</head>
-	<body>
+        <head>
+                <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+                <meta name="description" content="星露谷物语作物收益计算与可视化工具。" />
+                <title>星露谷收益计算器 - 更新记录</title>
+                <script src="js/d3.v7.min.js" charset="utf-8"></script>
+                <link rel="stylesheet" type="text/css" href="style/style.css" />
+                <link rel="shortcut icon" type="image/png" href="img/ancientfruit.png">
+        </head>
+        <body>
 
-		<div class="title">
-		</div>
+                <div class="title">
+                </div>
 
-		<div class="changes">
-			<h1>Change Log</h1>
+                <div class="changes">
+                        <h1>更新记录</h1>
             <h2>v1.6.11 <div class="date">(2024-06-15)</div></h2>
             <ul>
-                <li>Fixed an issue where Artisan skill wan't applied for Jars, Casks and Kegs. <a href="https://github.com/Thorinair/Stardew-Profits/issues/77" target="_blank">[Issue #77]</a></li>
+                <li>修复工匠技能未正确应用于腌制罐、木桶和酒桶的问题。<a href="https://github.com/Thorinair/Stardew-Profits/issues/77" target="_blank">[Issue #77]</a></li>
             </ul>
             <h2>v1.6.10 <div class="date">(2024-06-06)</div></h2>
             <ul>
-                <li>Added Dehydrator calculations. <a href="https://github.com/Thorinair/Stardew-Profits/pull/68" target="_blank">[Pull Request #69]</a> <a href="https://github.com/Thorinair/Stardew-Profits/pull/73" target="_blank">[Pull Request #73]</a> <a href="https://github.com/Thorinair/Stardew-Profits/pull/74" target="_blank">[Pull Request #74]</a></li>
-                <li>Added an Excess option for Jars and Kegs. When Sell Raw is checked, raw crops will be sold at the normal value price.</li>
-                <li>Varios artisan good options are now fully hidden depending which artisan good is selected. <a href="https://github.com/Thorinair/Stardew-Profits/pull/74" target="_blank">[Pull Request #74]</a></li>
-                <li>Changed the styling of the options menu a bit.</li>
-                <li>Fixed various calculation issues when using Process & Replant.</li>
+                <li>加入脱水机的收益计算。<a href="https://github.com/Thorinair/Stardew-Profits/pull/68" target="_blank">[Pull Request #69]</a> <a href="https://github.com/Thorinair/Stardew-Profits/pull/73" target="_blank">[Pull Request #73]</a> <a href="https://github.com/Thorinair/Stardew-Profits/pull/74" target="_blank">[Pull Request #74]</a></li>
+                <li>新增“剩余产出”选项，当勾选“改为出售原物”时，剩余作物会按原价出售。</li>
+                <li>根据所选手工品类型自动隐藏无关选项，以保持界面简洁。<a href="https://github.com/Thorinair/Stardew-Profits/pull/74" target="_blank">[Pull Request #74]</a></li>
+                <li>微调选项布局，使其更紧凑顺手。</li>
+                <li>修复启用“制作种子并再种”时的若干收益计算问题。</li>
             </ul>
             <h2>v1.6.9 <div class="date">(2024-05-15)</div></h2>
             <ul>
-                <li>Fixed wrong regrow time for Broccoli. <a href="https://github.com/Thorinair/Stardew-Profits/pull/70" target="_blank">[Pull Request #70]</a></li>
+                <li>修正西蓝花的再生时间。<a href="https://github.com/Thorinair/Stardew-Profits/pull/70" target="_blank">[Pull Request #70]</a></li>
             </ul>
             <h2>v1.6.8 <div class="date">(2024-05-08)</div></h2>
             <ul>
-                <li>Added an option of disabling links to the Official Wiki when pressing on graph. <a href="https://github.com/Thorinair/Stardew-Profits/pull/68" target="_blank">[Pull Request #68]</a></li>
-                <li>Farming and Foraging levels can now be set to 0, and are 0 by default. <a href="https://github.com/Thorinair/Stardew-Profits/pull/68" target="_blank">[Pull Request #68]</a></li>
+                <li>新增“禁用作物链接”选项，可阻止点击柱状图时跳转至官方维基。<a href="https://github.com/Thorinair/Stardew-Profits/pull/68" target="_blank">[Pull Request #68]</a></li>
+                <li>耕种与觅食等级现可设置为 0，默认值也改为 0。<a href="https://github.com/Thorinair/Stardew-Profits/pull/68" target="_blank">[Pull Request #68]</a></li>
             </ul>
             <h2>v1.6.7 <div class="date">(2024-04-12)</div></h2>
             <ul>
-                <li>Improved calculations when seeds are reused, especially for plants with multiple produce. <a href="https://github.com/Thorinair/Stardew-Profits/pull/64" target="_blank">[Pull Request #64]</a></li>
-                <li>Fixed replanting calculation for Coffee. <a href="https://github.com/Thorinair/Stardew-Profits/pull/64" target="_blank">[Pull Request #64]</a></li>
-                <li>Fixed an issue with wrong label association in the options. <a href="https://github.com/Thorinair/Stardew-Profits/pull/64" target="_blank">[Pull Request #64]</a></li>
-                <li>Added a toggle whether the crops should be processed into seeds for next year. <a href="https://github.com/Thorinair/Stardew-Profits/pull/65" target="_blank">[Pull Request #65]</a></li>
+                <li>优化重复利用种子的计算，尤其是多产作物。<a href="https://github.com/Thorinair/Stardew-Profits/pull/64" target="_blank">[Pull Request #64]</a></li>
+                <li>修正咖啡的再种收益计算。<a href="https://github.com/Thorinair/Stardew-Profits/pull/64" target="_blank">[Pull Request #64]</a></li>
+                <li>修复部分选项的标签关联错误。<a href="https://github.com/Thorinair/Stardew-Profits/pull/64" target="_blank">[Pull Request #64]</a></li>
+                <li>新增是否保留种子到下一年的切换选项。<a href="https://github.com/Thorinair/Stardew-Profits/pull/65" target="_blank">[Pull Request #65]</a></li>
             </ul>
             <h2>v1.6.6 <div class="date">(2024-04-12)</div></h2>
             <ul>
-                <li>Fixed an issue which caused some Keg values, like Hops, to be incorrect.</li>
+                <li>修复导致部分酒桶产值（如啤酒花）异常的错误。</li>
             </ul>
             <h2>v1.6.5 <div class="date">(2024-04-11)</div></h2>
             <ul>
-                <li>Fixed an issue which caused Jar values to be incorrect and to appear like Keg values.</li>
-                <li>Fixed issues in some Keg price calculations.</li>
+                <li>修复腌制罐产值错误并误显示为酒桶数值的问题。</li>
+                <li>修正部分酒桶价格计算不准确的情况。</li>
             </ul>
             <h2>v1.6.4 <div class="date">(2024-04-03)</div></h2>
             <ul>
-                <li>Fixed an issue which prevented some of the new 1.6 crops from appearing in the graph.</li>
-                <li>Update seed sell prices of new crops.</li>
+                <li>修复部分 1.6 新作物未显示在图表中的问题。</li>
+                <li>更新新作物的种子售价。</li>
             </ul>
             <h2>v1.6.3 <div class="date">(2024-03-30)</div></h2>
             <ul>
-                <li>Fixed an issue where Pay For Seeds would keep calculating seed costs for replants even when Process & Replant was enabled.</li>
+                <li>修复在启用“制作种子并再种”时仍计算重新购种成本的问题。</li>
             </ul>
             <h2>v1.6.2 <div class="date">(2024-03-30)</div></h2>
             <ul>
-                <li>Implemented a Process & Replant option. Enabling this option reuses half of the harvested seeds for replanting on crops which don't have a regrow time. Also forces an even number of crops.</li>
-                <li>Changes and improvements to the profit calculation formula.</li>
-                <li>Fixed an issue which would prevent prices from updating when day count was changed.</li>
-                <li>Fixed an issue which would cause values to not update when changing Foraging skill level.</li>
+                <li>实现“制作种子并再种”选项，不会再生的作物会保留一半收成用于制种，并强制种植数量为偶数。</li>
+                <li>改进收益公式，使计算更准确。</li>
+                <li>修复修改天数后价格没有刷新的问题。</li>
+                <li>修复调整觅食等级时收益不更新的问题。</li>
             </ul>
             <h2>v1.6.1 <div class="date">(2024-03-29)</div></h2>
             <ul>
-                <li>Added a toggle for selling Raw crops when there is no available artisan good.</li>
-                <li>Changed the order of some options to make them more compact and logical.</li>
-                <li>Changed some option names and did proper capitalization</li>
-                <li>Changes to the Help page and README, write better descriptions.</li>
+                <li>新增当没有对应手工品时出售原作物的切换。</li>
+                <li>调整部分选项顺序，使布局更紧凑合理。</li>
+                <li>统一部分选项命名与大小写。</li>
+                <li>更新帮助页面与 README，提供更清晰的说明。</li>
             </ul>
-			<h2>v1.6.0 <div class="date">(2024-03-29)</div></h2>
+                        <h2>v1.6.0 <div class="date">(2024-03-29)</div></h2>
             <ul>
-                <li>Added Stardew Valley v1.6 seeds and crops. <a href="https://github.com/Thorinair/Stardew-Profits/pull/58" target="_blank">[Pull Request #58]</a></li>
-                <li>Added Return On Investment (ROI) calculations. <a href="https://github.com/Thorinair/Stardew-Profits/pull/54" target="_blank">[Pull Request #54]</a></li>
-                <li>Update Potato value to be more accurate. <a href="https://github.com/Thorinair/Stardew-Profits/pull/55" target="_blank">[Pull Request #55]</a></li>
-                <li>Added the Equipment value, which designates how many Jars or Kegs you will use. <a href="https://github.com/Thorinair/Stardew-Profits/issues/33" target="_blank">[Issue #33]</a></li>
-                <li>Added the Aging option which is available only for the Keg produce type. <a href="https://github.com/Thorinair/Stardew-Profits/issues/52" target="_blank">[Issue #52]</a></li>
-                <li>Added Seeds as one of the produce types. This can be used when selling Seed Maker produce. <a href="https://github.com/Thorinair/Stardew-Profits/issues/21" target="_blank">[Issue #21]</a></li>
-                <li>Made Ancient Fruit seeds unpurchasable. <a href="https://github.com/Thorinair/Stardew-Profits/issues/60" target="_blank">[Issue #60]</a></li>
-                <li>Fixed an issue where fertilizer-modified growth time wasn't updated on tooltip. <a href="https://github.com/Thorinair/Stardew-Profits/issues/39" target="_blank">[Issue #39]</a></li>
-                <li>Added a proper Change Log page. Changes will be listed here from now on for clarity.</li>
+                <li>加入《星露谷物语》1.6 版本新增的作物与种子。<a href="https://github.com/Thorinair/Stardew-Profits/pull/58" target="_blank">[Pull Request #58]</a></li>
+                <li>新增投资回报率（ROI）计算。<a href="https://github.com/Thorinair/Stardew-Profits/pull/54" target="_blank">[Pull Request #54]</a></li>
+                <li>调高马铃薯价格，使其更加精确。<a href="https://github.com/Thorinair/Stardew-Profits/pull/55" target="_blank">[Pull Request #55]</a></li>
+                <li>新增“设备数量”选项，可设定腌制罐或酒桶数量。<a href="https://github.com/Thorinair/Stardew-Profits/issues/33" target="_blank">[Issue #33]</a></li>
+                <li>新增“陈酿等级”选项，仅在选择酒桶产出时可用。<a href="https://github.com/Thorinair/Stardew-Profits/issues/52" target="_blank">[Issue #52]</a></li>
+                <li>新增“种子”作为产出类型，可用于出售种子机产物。<a href="https://github.com/Thorinair/Stardew-Profits/issues/21" target="_blank">[Issue #21]</a></li>
+                <li>将远古水果种子设定为无法购买。<a href="https://github.com/Thorinair/Stardew-Profits/issues/60" target="_blank">[Issue #60]</a></li>
+                <li>修复施肥后生长时间未在提示卡中更新的问题。<a href="https://github.com/Thorinair/Stardew-Profits/issues/39" target="_blank">[Issue #39]</a></li>
+                <li>新增独立的更新记录页面，方便查阅历史改动。</li>
             </ul>
-			<br />
-			<div id="divhelp"><a href="index.html">Back</a></div>
-		</div>
+                        <br />
+                        <div id="divhelp"><a href="index.html">返回</a></div>
+                </div>
 
-		<div class="footer">
-            <p><a href="http://stardewvalley.net/" target="_blank">Stardew Valley v1.6.7</a> &copy; <a href="https://twitter.com/ConcernedApe" target="_blank">ConcernedApe</a> | Website designed by <a href="https://twitter.com/thorinair_music" target="_blank">Thorinair</a> | <a href="https://github.com/Thorinair/Stardew-Profits" target="_blank">Stardew Profits v1.6.11</a></p>
-		</div>
+                <div class="footer">
+            <p><a href="http://stardewvalley.net/" target="_blank">《星露谷物语》v1.6.7</a> &copy; <a href="https://twitter.com/ConcernedApe" target="_blank">ConcernedApe</a> | 网站设计：<a href="https://twitter.com/thorinair_music" target="_blank">Thorinair</a> | <a href="https://github.com/Thorinair/Stardew-Profits" target="_blank">Stardew Profits v1.6.11</a></p>
+                </div>
 
-		<script src="js/time.js"> </script>
-	</body>
+                <script src="js/time.js"> </script>
+        </body>
 </html>

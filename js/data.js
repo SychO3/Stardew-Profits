@@ -39,44 +39,44 @@ var options = {
 // Different fertilizers with their stats.
 var fertilizers = [
 	{
-		"name": "None",
+		"name": "无",
 		"ratio": 0,
 		"growth": 1,
 		"cost": 0
 	},
 	{
-		"name": "Basic Fertilizer",
+		"name": "基础肥料",
 		"ratio": 1,
 		"growth": 1,
 		"cost": 100
 	},
 	{
-		"name": "Quality Fertilizer",
+		"name": "优质肥料",
 		"ratio": 2,
 		"growth": 1,
 		"cost": 150
 	},
 	{
-		"name": "Speed-Gro",
+		"name": "速生肥",
 		"ratio": 0,
 		"growth": 0.9,
 		"cost": 100
 	},
 	{
-		"name": "Deluxe Speed-Gro",
+		"name": "豪华速生肥",
 		"ratio": 0,
 		"growth": 0.75,
 		"cost": 150,
 		"alternate_cost": 80
 	},
 	{
-		"name": "Deluxe Fertilizer",
+		"name": "豪华肥料",
 		"ratio": 3,
 		"growth": 1,
 		"cost": 0
 	},
 	{
-		"name": "Hyper Speed-Gro",
+		"name": "特级速生肥",
 		"ratio": 0,
 		"growth": 0.67,
 		"cost": 0
@@ -86,7 +86,7 @@ var fertilizers = [
 // Different seasons with predefined crops.
 var seasons = [
 	{
-		"name": "Spring",
+		"name": "春季",
 		"duration": 28,
 		"crops": [
 			crops.coffeebean,
@@ -108,7 +108,7 @@ var seasons = [
 		]
 	},
 	{
-		"name": "Summer",
+		"name": "夏季",
 		"duration": 28,
 		"crops": [
 			crops.pineapple,
@@ -134,7 +134,7 @@ var seasons = [
 		]
 	},
 	{
-		"name": "Fall",
+		"name": "秋季",
 		"duration": 28,
 		"crops": [
 			crops.sweetgemberry,
@@ -158,7 +158,7 @@ var seasons = [
 		]
 	},
 	{
-		"name": "Winter",
+		"name": "冬季",
 		"duration": 28,
 		"crops": [
 			crops.winterseeds,
@@ -166,7 +166,7 @@ var seasons = [
 		]
 	},
 	{
-		"name": "Greenhouse",
+		"name": "温室",
 		"duration": 112,
 		"crops": [
 			crops.pineapple,
