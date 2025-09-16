@@ -5,7 +5,7 @@
 // Crop List
 var crops = {
   "carrot": {
-    "name": "Carrot",
+    "name": "胡萝卜",
     "url": "https://stardewvalleywiki.com/Carrot",
     "img": "carrot.png",
     "seeds": {
@@ -13,7 +13,7 @@ var crops = {
       "pierre": 0,
       "joja": 0,
       "special": 0,
-      "specialLoc": "Unpurchasable",
+      "specialLoc": "无法购买",
       "specialUrl": "https://stardewvalleywiki.com/Carrot_Seeds"
     },
     "growth": {
@@ -24,12 +24,12 @@ var crops = {
       "extra": 0,
       "extraPerc": 0,
       "price": 35,
-      "jarType": "Pickles",
-      "kegType": "Juice"
+      "jarType": "腌菜",
+      "kegType": "果汁"
     }
   },
   "summersquash": {
-    "name": "Summer Squash",
+    "name": "金皮西葫芦",
     "url": "https://stardewvalleywiki.com/Summer_Squash",
     "img": "summersquash.png",
     "seeds": {
@@ -37,7 +37,7 @@ var crops = {
       "pierre": 0,
       "joja": 0,
       "special": 0,
-      "specialLoc": "Unpurchasable",
+      "specialLoc": "无法购买",
       "specialUrl": "https://stardewvalleywiki.com/Summer_Squash_Seeds"
     },
     "growth": {
@@ -48,12 +48,12 @@ var crops = {
       "extra": 0,
       "extraPerc": 0,
       "price": 45,
-      "jarType": "Pickles",
-      "kegType": "Juice"
+      "jarType": "腌菜",
+      "kegType": "果汁"
     }
   },
   "broccoli": {
-    "name": "Broccoli",
+    "name": "西蓝花",
     "url": "https://stardewvalleywiki.com/Broccoli",
     "img": "broccoli.png",
     "seeds": {
@@ -61,7 +61,7 @@ var crops = {
       "pierre": 0,
       "joja": 0,
       "special": 0,
-      "specialLoc": "Unpurchasable",
+      "specialLoc": "无法购买",
       "specialUrl": "https://stardewvalleywiki.com/Broccoli_Seeds"
     },
     "growth": {
@@ -72,12 +72,12 @@ var crops = {
       "extra": 0,
       "extraPerc": 0,
       "price": 70,
-      "jarType": "Pickles",
-      "kegType": "Juice"
+      "jarType": "腌菜",
+      "kegType": "果汁"
     }
   },
   "powdermelon": {
-    "name": "Powdermelon",
+    "name": "霜瓜",
     "url": "https://stardewvalleywiki.com/Powdermelon",
     "img": "powdermelon.png",
     "seeds": {
@@ -85,7 +85,7 @@ var crops = {
       "pierre": 0,
       "joja": 0,
       "special": 0,
-      "specialLoc": "Unpurchasable",
+      "specialLoc": "无法购买",
       "specialUrl": "https://stardewvalleywiki.com/Powdermelon_Seeds"
     },
     "growth": {
@@ -96,13 +96,13 @@ var crops = {
       "extra": 0,
       "extraPerc": 0,
       "price": 70,
-      "jarType": "Jelly",
-      "kegType": "Wine",
-      "dehydratorType": "Dried Fruit"
+      "jarType": "果酱",
+      "kegType": "葡萄酒",
+      "dehydratorType": "干果"
     }
   },
   "amaranth": {
-    "name": "Amaranth",
+    "name": "苋菜",
     "url": "http://stardewvalleywiki.com/Amaranth",
     "img": "amaranth.png",
     "seeds": {
@@ -121,12 +121,12 @@ var crops = {
       "extra": 0,
       "extraPerc": 0,
       "price": 150,
-      "jarType": "Pickles",
-      "kegType": "Juice"
+      "jarType": "腌菜",
+      "kegType": "果汁"
     }
   },
   "grape": {
-    "name": "Grape",
+    "name": "葡萄",
     "url": "http://stardewvalleywiki.com/Grape",
     "img": "grape.png",
     "seeds": {
@@ -145,13 +145,13 @@ var crops = {
       "extra": 0,
       "extraPerc": 0,
       "price": 80,
-      "jarType": "Jelly",
-      "kegType": "Wine",
-      "dehydratorType": "Raisins"
+      "jarType": "果酱",
+      "kegType": "葡萄酒",
+      "dehydratorType": "葡萄干"
     }
   },
   "hops": {
-    "name": "Hops",
+    "name": "啤酒花",
     "url": "http://stardewvalleywiki.com/Hops",
     "img": "hops.png",
     "seeds": {
@@ -171,12 +171,12 @@ var crops = {
       "extraPerc": 0,
       "price": 25,
       "keg": 300,
-      "jarType": "Pickles",
-      "kegType": "Pale Ale"
+      "jarType": "腌菜",
+      "kegType": "淡啤酒"
     }
   },
   "pineapple": {
-    "name": "Pineapple",
+    "name": "菠萝",
     "url": "http://stardewvalleywiki.com/Pineapple",
     "img": "pineapple.png",
     "seeds": {
@@ -184,7 +184,7 @@ var crops = {
       "pierre": 0,
       "joja": 0,
       "special": 400,
-      "specialLoc": "Island Trader",
+      "specialLoc": "岛上商人",
       "specialUrl": "http://stardewvalleywiki.com/Island_Trader"
     },
     "growth": {
@@ -195,13 +195,13 @@ var crops = {
       "extra": 0,
       "extraPerc": 0,
       "price": 300,
-      "jarType": "Jelly",
-      "kegType": "Wine",
-      "dehydratorType": "Dried Fruit"
+      "jarType": "果酱",
+      "kegType": "葡萄酒",
+      "dehydratorType": "干果"
     }
   },
   "sweetgemberry": {
-    "name": "Sweet Gem Berry",
+    "name": "宝石甜莓",
     "url": "http://stardewvalleywiki.com/Sweet_Gem_Berry",
     "img": "sweetgemberry.png",
     "seeds": {
@@ -209,7 +209,7 @@ var crops = {
       "pierre": 0,
       "joja": 0,
       "special": 1000,
-      "specialLoc": "Travelling Cart",
+      "specialLoc": "流动商人",
       "specialUrl": "http://stardewvalleywiki.com/Travelling_Cart"
     },
     "growth": {
@@ -223,7 +223,7 @@ var crops = {
     }
   },
   "tealeaves": {
-    "name": "Tea Leaves",
+    "name": "茶叶",
     "url": "http://stardewvalleywiki.com/Tea_Leaves",
     "img": "tealeaves.png",
     "seeds": {
@@ -231,7 +231,7 @@ var crops = {
       "pierre": 0,
       "joja": 0,
       "special": 2500,
-      "specialLoc": "Travelling Cart",
+      "specialLoc": "流动商人",
       "specialUrl": "http://stardewvalleywiki.com/Travelling_Cart"
     },
     "growth": {
@@ -243,12 +243,12 @@ var crops = {
       "extraPerc": 0,
       "price": 50,
       "keg": 100,
-      "jarType": "Pickles",
-      "kegType": "Tea"
+      "jarType": "腌菜",
+      "kegType": "茶"
     }
   },
   "fairyrose": {
-    "name": "Fairy Rose",
+    "name": "仙女玫瑰",
     "url": "http://stardewvalleywiki.com/Fairy_Rose",
     "img": "fairyrose.png",
     "seeds": {
@@ -270,7 +270,7 @@ var crops = {
     }
   },
   "tulip": {
-    "name": "Tulip",
+    "name": "郁金香",
     "url": "http://stardewvalleywiki.com/Tulip",
     "img": "tulip.png",
     "seeds": {
@@ -292,7 +292,7 @@ var crops = {
     }
   },
   "bluejazz": {
-    "name": "Blue Jazz",
+    "name": "蓝爵",
     "url": "http://stardewvalleywiki.com/Blue_Jazz",
     "img": "bluejazz.png",
     "seeds": {
@@ -314,7 +314,7 @@ var crops = {
     }
   },
   "sunflower": {
-    "name": "Sunflower",
+    "name": "向日葵",
     "url": "http://stardewvalleywiki.com/Sunflower",
     "img": "sunflower.png",
     "seeds": {
@@ -336,7 +336,7 @@ var crops = {
     }
   },
   "coffeebean": {
-    "name": "Coffee Bean",
+    "name": "咖啡豆",
     "url": "http://stardewvalleywiki.com/Coffee_Bean",
     "img": "coffeebean.png",
     "seeds": {
@@ -344,7 +344,7 @@ var crops = {
       "pierre": 0,
       "joja": 0,
       "special": 2500,
-      "specialLoc": "Travelling Cart",
+      "specialLoc": "流动商人",
       "specialUrl": "http://stardewvalleywiki.com/Travelling_Cart"
     },
     "growth": {
@@ -356,11 +356,11 @@ var crops = {
       "extraPerc": 1,
       "price": 15,
       "keg": 150 / 5,
-      "kegType": "Coffee"
+      "kegType": "咖啡"
     }
   },
   "poppy": {
-    "name": "Poppy",
+    "name": "虞美人",
     "url": "http://stardewvalleywiki.com/Poppy",
     "img": "poppy.png",
     "seeds": {
@@ -382,7 +382,7 @@ var crops = {
     }
   },
   "summerspangle": {
-    "name": "Summer Spangle",
+    "name": "夏季亮片花",
     "url": "http://stardewvalleywiki.com/Summer_Spangle",
     "img": "summerspangle.png",
     "seeds": {
@@ -404,7 +404,7 @@ var crops = {
     }
   },
   "parsnip": {
-    "name": "Parsnip",
+    "name": "防风草",
     "url": "http://stardewvalleywiki.com/Parsnip",
     "img": "parsnip.png",
     "seeds": {
@@ -423,12 +423,12 @@ var crops = {
       "extra": 0,
       "extraPerc": 0,
       "price": 35,
-      "jarType": "Pickles",
-      "kegType": "Juice"
+      "jarType": "腌菜",
+      "kegType": "果汁"
     }
   },
   "greenbean": {
-    "name": "Green Bean",
+    "name": "青豆",
     "url": "http://stardewvalleywiki.com/Green_Bean",
     "img": "greenbean.png",
     "seeds": {
@@ -447,12 +447,12 @@ var crops = {
       "extra": 0,
       "extraPerc": 0,
       "price": 40,
-      "jarType": "Pickles",
-      "kegType": "Juice"
+      "jarType": "腌菜",
+      "kegType": "果汁"
     }
   },
   "cauliflower": {
-    "name": "Cauliflower",
+    "name": "花椰菜",
     "url": "http://stardewvalleywiki.com/Cauliflower",
     "img": "cauliflower.png",
     "seeds": {
@@ -471,12 +471,12 @@ var crops = {
       "extra": 0,
       "extraPerc": 0,
       "price": 175,
-      "jarType": "Pickles",
-      "kegType": "Juice"
+      "jarType": "腌菜",
+      "kegType": "果汁"
     }
   },
   "potato": {
-    "name": "Potato",
+    "name": "土豆",
     "url": "http://stardewvalleywiki.com/Potato",
     "img": "potato.png",
     "seeds": {
@@ -495,12 +495,12 @@ var crops = {
       "extra": 1,
       "extraPerc": 0.25, // technically (0.2^1) + (0.2^2) + (0.2^3) ...
       "price": 80,
-      "jarType": "Pickles",
-      "kegType": "Juice"
+      "jarType": "腌菜",
+      "kegType": "果汁"
     }
   },
   "garlic": {
-    "name": "Garlic",
+    "name": "大蒜",
     "url": "http://stardewvalleywiki.com/Garlic",
     "img": "garlic.png",
     "seeds": {
@@ -519,12 +519,12 @@ var crops = {
       "extra": 0,
       "extraPerc": 0,
       "price": 60,
-      "jarType": "Pickles",
-      "kegType": "Juice"
+      "jarType": "腌菜",
+      "kegType": "果汁"
     }
   },
   "taroroot": {
-    "name": "Taro Root",
+    "name": "芋头",
     "url": "http://stardewvalleywiki.com/Taro_Root",
     "img": "taroroot.png",
     "seeds": {
@@ -532,7 +532,7 @@ var crops = {
       "pierre": 0,
       "joja": 0,
       "special": 24,
-      "specialLoc": "Island Trader",
+      "specialLoc": "岛上商人",
       "specialUrl": "http://stardewvalleywiki.com/Island_Trader"
     },
     "growth": {
@@ -543,12 +543,12 @@ var crops = {
       "extra": 0,
       "extraPerc": 0,
       "price": 100,
-      "jarType": "Pickles",
-      "kegType": "Juice"
+      "jarType": "腌菜",
+      "kegType": "果汁"
     }
   },
   "kale": {
-    "name": "Kale",
+    "name": "羽衣甘蓝",
     "url": "http://stardewvalleywiki.com/Kale",
     "img": "kale.png",
     "seeds": {
@@ -567,12 +567,12 @@ var crops = {
       "extra": 0,
       "extraPerc": 0,
       "price": 110,
-      "jarType": "Pickles",
-      "kegType": "Juice"
+      "jarType": "腌菜",
+      "kegType": "果汁"
     }
   },
   "unmilledrice": {
-    "name": "Unmilled Rice",
+    "name": "未碾米",
     "url": "http://stardewvalleywiki.com/Unmilled_Rice",
     "img": "unmilledrice.png",
     "seeds": {
@@ -580,7 +580,7 @@ var crops = {
       "pierre": 40,
       "joja": 0,
       "special": 1000,
-      "specialLoc": "Travelling Cart",
+      "specialLoc": "流动商人",
       "specialUrl": "http://stardewvalleywiki.com/Travelling_Cart"
     },
     "growth": {
@@ -591,12 +591,12 @@ var crops = {
       "extra": 1,
       "extraPerc": 0.11,
       "price": 30,
-      "jarType": "Pickles",
-      "kegType": "Juice"
+      "jarType": "腌菜",
+      "kegType": "果汁"
     }
   },
   "rhubarb": {
-    "name": "Rhubarb",
+    "name": "大黄",
     "url": "http://stardewvalleywiki.com/Rhubarb",
     "img": "rhubarb.png",
     "seeds": {
@@ -604,7 +604,7 @@ var crops = {
       "pierre": 0,
       "joja": 0,
       "special": 100,
-      "specialLoc": "Oasis",
+      "specialLoc": "绿洲",
       "specialUrl": "http://stardewvalleywiki.com/Oasis"
     },
     "growth": {
@@ -615,13 +615,13 @@ var crops = {
       "extra": 0,
       "extraPerc": 0,
       "price": 220,
-      "jarType": "Jelly",
-      "kegType": "Wine",
-      "dehydratorType": "Dried Fruit"
+      "jarType": "果酱",
+      "kegType": "葡萄酒",
+      "dehydratorType": "干果"
     }
   },
   "melon": {
-    "name": "Melon",
+    "name": "甜瓜",
     "url": "http://stardewvalleywiki.com/Melon",
     "img": "melon.png",
     "seeds": {
@@ -640,13 +640,13 @@ var crops = {
       "extra": 0,
       "extraPerc": 0,
       "price": 250,
-      "jarType": "Jelly",
-      "kegType": "Wine",
-      "dehydratorType": "Dried Fruit"
+      "jarType": "果酱",
+      "kegType": "葡萄酒",
+      "dehydratorType": "干果"
     }
   },
   "tomato": {
-    "name": "Tomato",
+    "name": "番茄",
     "url": "http://stardewvalleywiki.com/Tomato",
     "img": "tomato.png",
     "seeds": {
@@ -665,12 +665,12 @@ var crops = {
       "extra": 1,
       "extraPerc": 0.05,
       "price": 60,
-      "jarType": "Pickles",
-      "kegType": "Juice"
+      "jarType": "腌菜",
+      "kegType": "果汁"
     }
   },
   "blueberry": {
-    "name": "Blueberry",
+    "name": "蓝莓",
     "url": "http://stardewvalleywiki.com/Blueberry",
     "img": "blueberry.png",
     "seeds": {
@@ -689,13 +689,13 @@ var crops = {
       "extra": 2,
       "extraPerc": 1,
       "price": 50,
-      "jarType": "Jelly",
-      "kegType": "Wine",
-      "dehydratorType": "Dried Fruit"
+      "jarType": "果酱",
+      "kegType": "葡萄酒",
+      "dehydratorType": "干果"
     }
   },
   "hotpepper": {
-    "name": "Hot Pepper",
+    "name": "辣椒",
     "url": "http://stardewvalleywiki.com/Hot_Pepper",
     "img": "hotpepper.png",
     "seeds": {
@@ -714,13 +714,13 @@ var crops = {
       "extra": 1,
       "extraPerc": 0.03,
       "price": 40,
-      "jarType": "Jelly",
-      "kegType": "Wine",
-      "dehydratorType": "Dried Fruit"
+      "jarType": "果酱",
+      "kegType": "葡萄酒",
+      "dehydratorType": "干果"
     }
   },
   "wheat": {
-    "name": "Wheat",
+    "name": "小麦",
     "url": "http://stardewvalleywiki.com/Wheat",
     "img": "wheat.png",
     "seeds": {
@@ -740,12 +740,12 @@ var crops = {
       "extraPerc": 0,
       "price": 25,
       "keg": 200,
-      "jarType": "Pickles",
-      "kegType": "Beer"
+      "jarType": "腌菜",
+      "kegType": "啤酒"
     }
   },
   "radish": {
-    "name": "Radish",
+    "name": "萝卜",
     "url": "http://stardewvalleywiki.com/Radish",
     "img": "radish.png",
     "seeds": {
@@ -764,12 +764,12 @@ var crops = {
       "extra": 0,
       "extraPerc": 0,
       "price": 90,
-      "jarType": "Pickles",
-      "kegType": "Juice"
+      "jarType": "腌菜",
+      "kegType": "果汁"
     }
   },
   "redcabbage": {
-    "name": "Red Cabbage",
+    "name": "红叶卷心菜",
     "url": "http://stardewvalleywiki.com/Red_Cabbage",
     "img": "redcabbage.png",
     "seeds": {
@@ -788,12 +788,12 @@ var crops = {
       "extra": 0,
       "extraPerc": 0,
       "price": 260,
-      "jarType": "Pickles",
-      "kegType": "Juice"
+      "jarType": "腌菜",
+      "kegType": "果汁"
     }
   },
   "starfruit": {
-    "name": "Starfruit",
+    "name": "杨桃",
     "url": "http://stardewvalleywiki.com/Starfruit",
     "img": "starfruit.png",
     "seeds": {
@@ -801,7 +801,7 @@ var crops = {
       "pierre": 0,
       "joja": 0,
       "special": 400,
-      "specialLoc": "Oasis",
+      "specialLoc": "绿洲",
       "specialUrl": "http://stardewvalleywiki.com/Oasis"
     },
     "growth": {
@@ -812,13 +812,13 @@ var crops = {
       "extra": 0,
       "extraPerc": 0,
       "price": 750,
-      "jarType": "Jelly",
-      "kegType": "Wine",
-      "dehydratorType": "Dried Fruit"
+      "jarType": "果酱",
+      "kegType": "葡萄酒",
+      "dehydratorType": "干果"
     }
   },
   "corn": {
-    "name": "Corn",
+    "name": "玉米",
     "url": "http://stardewvalleywiki.com/Corn",
     "img": "corn.png",
     "seeds": {
@@ -837,12 +837,12 @@ var crops = {
       "extra": 0,
       "extraPerc": 0,
       "price": 50,
-      "jarType": "Pickles",
-      "kegType": "Juice"
+      "jarType": "腌菜",
+      "kegType": "果汁"
     }
   },
   "eggplant": {
-    "name": "Eggplant",
+    "name": "茄子",
     "url": "http://stardewvalleywiki.com/Eggplant",
     "img": "eggplant.png",
     "seeds": {
@@ -861,12 +861,12 @@ var crops = {
       "extra": 1,
       "extraPerc": 0.002,
       "price": 60,
-      "jarType": "Pickles",
-      "kegType": "Juice"
+      "jarType": "腌菜",
+      "kegType": "果汁"
     }
   },
   "artichoke": {
-    "name": "Artichoke",
+    "name": "洋蓟",
     "url": "http://stardewvalleywiki.com/Artichoke",
     "img": "artichoke.png",
     "seeds": {
@@ -885,12 +885,12 @@ var crops = {
       "extra": 0,
       "extraPerc": 0,
       "price": 160,
-      "jarType": "Pickles",
-      "kegType": "Juice"
+      "jarType": "腌菜",
+      "kegType": "果汁"
     }
   },
   "pumpkin": {
-    "name": "Pumpkin",
+    "name": "南瓜",
     "url": "http://stardewvalleywiki.com/Pumpkin",
     "img": "pumpkin.png",
     "seeds": {
@@ -909,12 +909,12 @@ var crops = {
       "extra": 0,
       "extraPerc": 0,
       "price": 320,
-      "jarType": "Pickles",
-      "kegType": "Juice"
+      "jarType": "腌菜",
+      "kegType": "果汁"
     }
   },
   "bokchoy": {
-    "name": "Bok Choy",
+    "name": "小白菜",
     "url": "http://stardewvalleywiki.com/Bok_Choy",
     "img": "bokchoy.png",
     "seeds": {
@@ -933,12 +933,12 @@ var crops = {
       "extra": 0,
       "extraPerc": 0,
       "price": 80,
-      "jarType": "Pickles",
-      "kegType": "Juice"
+      "jarType": "腌菜",
+      "kegType": "果汁"
     }
   },
   "yam": {
-    "name": "Yam",
+    "name": "山药",
     "url": "http://stardewvalleywiki.com/Yam",
     "img": "yam.png",
     "seeds": {
@@ -957,12 +957,12 @@ var crops = {
       "extra": 0,
       "extraPerc": 0,
       "price": 160,
-      "jarType": "Pickles",
-      "kegType": "Juice"
+      "jarType": "腌菜",
+      "kegType": "果汁"
     }
   },
   "cranberries": {
-    "name": "Cranberries",
+    "name": "蔓越莓",
     "url": "http://stardewvalleywiki.com/Cranberries",
     "img": "cranberries.png",
     "seeds": {
@@ -981,13 +981,13 @@ var crops = {
       "extra": 1,
       "extraPerc": 1,
       "price": 75,
-      "jarType": "Jelly",
-      "kegType": "Wine",
-      "dehydratorType": "Dried Fruit"
+      "jarType": "果酱",
+      "kegType": "葡萄酒",
+      "dehydratorType": "干果"
     }
   },
   "beet": {
-    "name": "Beet",
+    "name": "甜菜",
     "url": "http://stardewvalleywiki.com/Beet",
     "img": "beet.png",
     "seeds": {
@@ -995,7 +995,7 @@ var crops = {
       "pierre": 0,
       "joja": 0,
       "special": 20,
-      "specialLoc": "Oasis",
+      "specialLoc": "绿洲",
       "specialUrl": "http://stardewvalleywiki.com/Oasis"
     },
     "growth": {
@@ -1006,12 +1006,12 @@ var crops = {
       "extra": 0,
       "extraPerc": 0,
       "price": 100,
-      "jarType": "Pickles",
-      "kegType": "Juice"
+      "jarType": "腌菜",
+      "kegType": "果汁"
     }
   },
   "ancientfruit": {
-    "name": "Ancient Fruit",
+    "name": "远古水果",
     "url": "http://stardewvalleywiki.com/Ancient_Fruit",
     "img": "ancientfruit.png",
     "seeds": {
@@ -1019,7 +1019,7 @@ var crops = {
       "pierre": 0,
       "joja": 0,
       "special": 0,
-      "specialLoc": "Unpurchasable",
+      "specialLoc": "无法购买",
       "specialUrl": "https://stardewvalleywiki.com/Ancient_Seeds"
     },
     "growth": {
@@ -1030,13 +1030,13 @@ var crops = {
       "extra": 0,
       "extraPerc": 0,
       "price": 550,
-      "jarType": "Jelly",
-      "kegType": "Wine",
-      "dehydratorType": "Dried Fruit"
+      "jarType": "果酱",
+      "kegType": "葡萄酒",
+      "dehydratorType": "干果"
     }
   },
   "cactusfruit": {
-    "name": "Cactus Fruit",
+    "name": "仙人掌果",
     "url": "http://stardewvalleywiki.com/Cactus_Fruit",
     "img": "cactusfruit.png",
     "seeds": {
@@ -1044,7 +1044,7 @@ var crops = {
       "pierre": 0,
       "joja": 0,
       "special": 150,
-      "specialLoc": "Oasis",
+      "specialLoc": "绿洲",
       "specialUrl": "http://stardewvalleywiki.com/Oasis"
     },
     "growth": {
@@ -1055,13 +1055,13 @@ var crops = {
       "extra": 0,
       "extraPerc": 0,
       "price": 75,
-      "jarType": "Jelly",
-      "kegType": "Wine",
-      "dehydratorType": "Dried Fruit"
+      "jarType": "果酱",
+      "kegType": "葡萄酒",
+      "dehydratorType": "干果"
     }
   },
   "strawberry": {
-    "name": "Strawberry",
+    "name": "草莓",
     "url": "http://stardewvalleywiki.com/Strawberry",
     "img": "strawberry.png",
     "seeds": {
@@ -1069,7 +1069,7 @@ var crops = {
       "pierre": 0,
       "joja": 0,
       "special": 100,
-      "specialLoc": "Egg Festival",
+      "specialLoc": "彩蛋节",
       "specialUrl": "http://stardewvalleywiki.com/Egg_Festival"
     },
     "growth": {
@@ -1080,13 +1080,13 @@ var crops = {
       "extra": 1,
       "extraPerc": 0.02,
       "price": 120,
-      "jarType": "Jelly",
-      "kegType": "Wine",
-      "dehydratorType": "Dried Fruit"
+      "jarType": "果酱",
+      "kegType": "葡萄酒",
+      "dehydratorType": "干果"
     }
   },
   "springseeds": {
-    "name": "Spring Seeds",
+    "name": "春季种子",
     "url": "http://stardewvalleywiki.com/Spring_Seeds",
     "img": "springseeds.png",
     "seeds": {
@@ -1094,7 +1094,7 @@ var crops = {
       "pierre": 0,
       "joja": 0,
       "special": 1000,
-      "specialLoc": "Travelling Cart",
+      "specialLoc": "流动商人",
       "specialUrl": "http://stardewvalleywiki.com/Travelling_Cart"
     },
     "growth": {
@@ -1110,7 +1110,7 @@ var crops = {
     "isWildseed": true
   },
   "summerseeds": {
-    "name": "Summer Seeds",
+    "name": "夏季种子",
     "url": "http://stardewvalleywiki.com/Summer_Seeds",
     "img": "summerseeds.png",
     "seeds": {
@@ -1118,7 +1118,7 @@ var crops = {
       "pierre": 0,
       "joja": 0,
       "special": 1000,
-      "specialLoc": "Travelling Cart",
+      "specialLoc": "流动商人",
       "specialUrl": "http://stardewvalleywiki.com/Travelling_Cart"
     },
     "growth": {
@@ -1130,13 +1130,13 @@ var crops = {
       "extraPerc": 0,
       // (Spice Berry + Grape + Sweet Pea) / 3
       "price": (80 + 80 + 50) / 3,
-      "jarType": "Jelly",
-      "kegType": "Wine"
+      "jarType": "果酱",
+      "kegType": "葡萄酒"
     },
     "isWildseed": true
   },
   "fallseeds": {
-    "name": "Fall Seeds",
+    "name": "秋季种子",
     "url": "http://stardewvalleywiki.com/Fall_Seeds",
     "img": "fallseeds.png",
     "seeds": {
@@ -1144,7 +1144,7 @@ var crops = {
       "pierre": 0,
       "joja": 0,
       "special": 1000,
-      "specialLoc": "Travelling Cart",
+      "specialLoc": "流动商人",
       "specialUrl": "http://stardewvalleywiki.com/Travelling_Cart"
     },
     "growth": {
@@ -1156,13 +1156,13 @@ var crops = {
       "extraPerc": 0,
       // (Blackberry + Common Mushroom + Hazelnut + Wild Plum) / 4
       "price": (20 + 40 + 90 + 80) / 4,
-      "jarType": "Jelly",
-      "kegType": "Wine"
+      "jarType": "果酱",
+      "kegType": "葡萄酒"
     },
     "isWildseed": true
   },
   "winterseeds": {
-    "name": "Winter Seeds",
+    "name": "冬季种子",
     "url": "http://stardewvalleywiki.com/Winter_Seeds",
     "img": "winterseeds.png",
     "seeds": {
@@ -1170,7 +1170,7 @@ var crops = {
       "pierre": 0,
       "joja": 0,
       "special": 1000,
-      "specialLoc": "Travelling Cart",
+      "specialLoc": "流动商人",
       "specialUrl": "http://stardewvalleywiki.com/Travelling_Cart"
     },
     "growth": {
@@ -1182,8 +1182,8 @@ var crops = {
       "extraPerc": 0,
       // (Crocus + Crystal Fruit + Snow Yam + Winter Root) / 4
       "price": (60 + 150 + 100 + 70) / 4,
-      "jarType": "Jelly",
-      "kegType": "Wine"
+      "jarType": "果酱",
+      "kegType": "葡萄酒"
     },
     "isWildseed": true
   }
