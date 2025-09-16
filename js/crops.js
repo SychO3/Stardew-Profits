@@ -4,27 +4,27 @@
 // Crop List
 var crops = {
   "carrot": {
-    "name": "胡萝卜",
-    "url": "https://zh.stardewvalleywiki.com/胡萝卜",
-    "img": "carrot.png",
-    "seeds": {
-      "sell": 15,
-      "pierre": 0,
-      "joja": 0,
-      "special": 0,
-      "specialLoc": "无法购买",
-      "specialUrl": "https://zh.stardewvalleywiki.com/胡萝卜种子"
+    "name": "胡萝卜", // 名称
+    "url": "https://zh.stardewvalleywiki.com/胡萝卜", // 维基链接
+    "img": "carrot.png", // 图片文件名
+    "seeds": { // 种子信息
+      "sell": 15,  // 出售价格
+      "pierre": 0,  // 杂货店(皮埃尔) 价格
+      "joja": 0,  // Joja超市 价格
+      "special": 0,  // 特殊商店 价格
+      "specialLoc": "无法购买",  // 购买地点
+      "specialUrl": "https://zh.stardewvalleywiki.com/胡萝卜种子" // 种子维基链接
     },
-    "growth": {
-      "initial": 3,
-      "regrow": 0
+    "growth": {  // 生长信息
+      "initial": 3,  // 初始生长天数
+      "regrow": 0  // 再生天数，0表示不再生
     },
-    "produce": {
-      "extra": 0,
-      "extraPerc": 0,
-      "price": 35,
-      "jarType": "腌菜",
-      "kegType": "果汁"
+    "produce": {  // 产出信息
+      "extra": 0,  // 额外产出数量
+      "extraPerc": 0,  // 额外产出概率
+      "price": 35,  // 出售价格
+      "jarType": "腌菜",  // 罐头类型
+      "kegType": "果汁"  // 酿酒类型
     }
   },
   "summersquash": {
@@ -183,7 +183,7 @@ var crops = {
       "pierre": 0,
       "joja": 0,
       "special": 400,
-      "specialLoc": "岛上商人",
+      "specialLoc": "姜岛商人",
       "specialUrl": "https://zh.stardewvalleywiki.com/姜岛商人"
     },
     "growth": {
@@ -208,7 +208,7 @@ var crops = {
       "pierre": 0,
       "joja": 0,
       "special": 1000,
-      "specialLoc": "流动商人",
+      "specialLoc": "旅行货车",
       "specialUrl": "https://zh.stardewvalleywiki.com/旅行货车"
     },
     "growth": {
@@ -230,7 +230,7 @@ var crops = {
       "pierre": 0,
       "joja": 0,
       "special": 2500,
-      "specialLoc": "流动商人",
+      "specialLoc": "旅行货车",
       "specialUrl": "https://zh.stardewvalleywiki.com/旅行货车"
     },
     "growth": {
@@ -343,7 +343,7 @@ var crops = {
       "pierre": 0,
       "joja": 0,
       "special": 2500,
-      "specialLoc": "流动商人",
+      "specialLoc": "旅行货车",
       "specialUrl": "https://zh.stardewvalleywiki.com/旅行货车"
     },
     "growth": {
@@ -531,7 +531,7 @@ var crops = {
       "pierre": 0,
       "joja": 0,
       "special": 24,
-      "specialLoc": "岛上商人",
+      "specialLoc": "姜岛商人",
       "specialUrl": "https://zh.stardewvalleywiki.com/姜岛商人"
     },
     "growth": {
@@ -579,7 +579,7 @@ var crops = {
       "pierre": 40,
       "joja": 0,
       "special": 1000,
-      "specialLoc": "流动商人",
+      "specialLoc": "旅行货车",
       "specialUrl": "https://zh.stardewvalleywiki.com/旅行货车"
     },
     "growth": {
@@ -1093,7 +1093,7 @@ var crops = {
       "pierre": 0,
       "joja": 0,
       "special": 1000,
-      "specialLoc": "流动商人",
+      "specialLoc": "旅行货车",
       "specialUrl": "https://zh.stardewvalleywiki.com/旅行货车"
     },
     "growth": {
@@ -1117,7 +1117,7 @@ var crops = {
       "pierre": 0,
       "joja": 0,
       "special": 1000,
-      "specialLoc": "流动商人",
+      "specialLoc": "旅行货车",
       "specialUrl": "https://zh.stardewvalleywiki.com/旅行货车"
     },
     "growth": {
@@ -1143,7 +1143,7 @@ var crops = {
       "pierre": 0,
       "joja": 0,
       "special": 1000,
-      "specialLoc": "流动商人",
+      "specialLoc": "旅行货车",
       "specialUrl": "https://zh.stardewvalleywiki.com/旅行货车"
     },
     "growth": {
@@ -1169,7 +1169,7 @@ var crops = {
       "pierre": 0,
       "joja": 0,
       "special": 1000,
-      "specialLoc": "流动商人",
+      "specialLoc": "旅行货车",
       "specialUrl": "https://zh.stardewvalleywiki.com/旅行货车"
     },
     "growth": {
