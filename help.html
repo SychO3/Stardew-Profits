@@ -1,166 +1,164 @@
-﻿
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-		<meta name="description" content="A Stardew Valley crop profits calculator and visualizer." />
-		<title>Stardew Profits - Help</title>
-		<script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>  
-		<link rel="stylesheet" type="text/css" href="style/style.css" />
-		<link rel="shortcut icon" type="image/png" href="img/ancientfruit.png">
-	</head>
-	<body>
+        <head>
+                <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+                <meta name="description" content="星露谷物语作物收益计算与可视化工具。" />
+                <title>星露谷收益计算器 - 帮助</title>
+                <script src="js/d3.v7.min.js" charset="utf-8"></script>
+                <link rel="stylesheet" type="text/css" href="style/style.css" />
+                <link rel="shortcut icon" type="image/png" href="img/ancientfruit.png">
+        </head>
+        <body>
 
-		<div class="title">
-		</div>
+                <div class="title">
+                </div>
 
-		<div class="help">
-			<h1>Stardew Profits</h1>
-			<p>Stardew Profits is a calculation and graphing tool designed to help the players of the popular game "Stardew Valley" to easily calculate and compare their profits from planting different crops under different conditions.</p>
-			<h1>Usage</h1>
-			<p>The tool is split up to two sections: graph box and options box. The options box lets the user quickly change the parameters which are then reflected on the graph.</p>
-			<h2>Graph Box</h2>
-			<p>The graph box displays a live rendered graph based on the options that the user has set. The number of bars changes based on the set conditions (like different seasons). The profit in gold can be viewed on the side as a scale. The graph shows both profit and loss. Additionally, if the seed buying loss is selected, the loss will be shown in orange, and if fertilizer buying loss is selected, the loss will be shown in brown. Hovering the mouse over a crop will show a tooltip with information about profits, loss and more. Pressing on a crop will open the official Wiki page for that crop, or you can disable this feature selecting the "Disable Links" option.</p>
-			<h2>Options Box</h2>
-			<p>The following table describes all the options and how they affect the graph.</p>
-			<table cellspacing="4">
-  				<col width="25%">
-				<thead>
-					<tr>
-						<th>Option</th>
-						<th>Description</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>Season</td>
-						<td>Changes the season of the crops. This will affect list of the crops shown in the graph, as only some crops grow at certain seasons. Additionally, all seasons have a limit of 28 maximum days for calculation. The <em>Greenhouse</em> season doesn't have such limitations, shows all crops and allows for a duration of up to 100 thousand days.</td>
-					</tr>
+                <div class="help">
+                        <h1>星露谷收益计算器</h1>
+                        <p>本工具用于帮助《星露谷物语》的玩家在不同条件下快速计算并比较各类作物的收益。选择参数后，图表会即时更新，直观呈现每项作物的收益情况。</p>
+                        <h1>使用说明</h1>
+                        <p>界面分为“图表区域”和“选项区域”。选项区域用于调整参数，图表区域会即时反映结果。</p>
+                        <h2>图表区域</h2>
+                        <p>图表会根据当前选项动态绘制。柱状图数量会随条件（例如季节）变化。纵轴显示收益或损失，勾选购买种子或肥料后，种子成本以橙色显示，肥料成本以棕色显示。将鼠标悬停在作物上会显示详细提示卡，可选择禁用链接避免跳转至维基。</p>
+                        <h2>选项区域</h2>
+                        <p>下表说明所有选项及其对图表的影响。</p>
+                        <table cellspacing="4">
+                                <col width="25%">
+                                <thead>
+                                        <tr>
+                                                <th>选项</th>
+                                                <th>说明</th>
+                                        </tr>
+                                </thead>
+                                <tbody>
+                                        <tr>
+                                                <td>季节</td>
+                                                <td>切换作物所属季节，仅显示该季节可种植的作物。普通季节最多计算 28 天；“温室”没有限制，并可设置至 100000 天。</td>
+                                        </tr>
                     <tr>
-                        <td>Cross-Season</td>
-                        <td>If this is checked, the calculations will take into account the crops that don't die when there's a season change.</td>
+                        <td>跨季</td>
+                        <td>勾选后会把季节交替时不会枯萎的作物纳入计算。</td>
                     </tr>
-					<tr>
-						<td>Current Day</td>
-						<td>The current date within the selected season. The value is subtracted from the previous <em>Number of days</em> to calculate how many days the crops have time to grow. This option is hidden if <em>Greenhouse</em> is chosen under <em>Season</em></td>
-					</tr>
+                                        <tr>
+                                                <td>当前日数</td>
+                                                <td>当前季节中的日期。该值会从“计算天数”中扣除，得到剩余可生长天数。选择温室后会隐藏此选项。</td>
+                                        </tr>
                     <tr>
-                        <td>Number of Days</td>
-                        <td>Designates the number of days to be used in the calculation. The shorter the duration, the less crops will have time to grow. Some crops might not have time to grow even once if a too low value is set. This option is set to read-only unless <em>Greenhouse</em> is chosen under <em>Season</em></td>
-                    </tr>
-                    <tr>
-                        <td>Number of Crops</td>
-                        <td>This controls the number of crops that the player has planted.</td>
-                    </tr>
-					<tr>
-						<td>Produce Type</td>
-						<td>Designates the type of produce to be sold after harvesting. By default, all crops are harvested and sold as raw. This option accounts for Normal/Silver/Gold ratios, <em>Farming</em> skill level, and some additional skills. Other options let you select one of the three different artisan goods. <em>Please take note that the Dehydrator may not use all produced crops, or not have enough crops to create dried goods.</em></td>
-					</tr>
-                    <tr>
-                        <td>Equipment</td>
-                        <td>Specifies how many Jars, Kegs, or Dehydrators you plan to use. This acts as a hard limit to the number of harvested crops on each harvest and ignores the time duration. Value is ignored when set to 0.</td>
+                        <td>计算天数</td>
+                        <td>设定参与计算的天数。时间越短，可收获的作物越少；若天数过少，部分作物可能无法成熟。除温室外为只读。</td>
                     </tr>
                     <tr>
-                        <td>No Artisan Good</td>
-                        <td>In case there is no available artisan good of the selected type, use the Raw crop sell price.</td>
+                        <td>种植数量</td>
+                        <td>指定玩家实际种植的作物数量。</td>
+                    </tr>
+                                        <tr>
+                                                <td>产出类型</td>
+                                                <td>设定收获后出售的成品。默认直接出售原作物，会考虑品质概率、耕种等级与相关技能。腌制罐、酒桶、脱水机与种子会按照其产出价值计算。<em>注意：脱水机需要 5 份原料，可能存在剩余。</em></td>
+                                        </tr>
+                    <tr>
+                        <td>设备数量</td>
+                        <td>计划使用的腌制罐、酒桶或脱水机数量。该值会限制每次收获可加工的作物数量，为 0 时忽略。</td>
                     </tr>
                     <tr>
-                        <td>Excess</td>
-                        <td>If there is unused produce when 5 are required for Dehydrators, or if not enough equipemnt is specified, the excess produce will be sold at normal value and added to the profit.</td>
+                        <td>无手工品</td>
+                        <td>当选定产出没有对应的手工成品时，改为按原物价格出售。</td>
                     </tr>
                     <tr>
-                        <td>Dehydrator By Harvest</td>
-                        <td>Dried goods will only be created that can be per harvest. If there are excess crops unused, they will not be crafted into a dry good. Deselecting this will accumulate unused excess per harvest to see if a dried good can be created.</td>
+                        <td>剩余产出</td>
+                        <td>当脱水机需求不足 5 个或设备数量不足时，剩余原料会按原价出售并计入收益。</td>
                     </tr>
                     <tr>
-                        <td>Aging</td>
-                        <td>Specifies the level of aging in a Cask for the final produce. Does not take in account how long it takes to age. This means that Hops might not necessarily be the best option as they would require a new additional Cask each day.</td>
+                        <td>按收获批次</td>
+                        <td>脱水机仅使用每次收获可用的原料。未使用的余量不会累积，取消勾选则会跨批次累积。</td>
                     </tr>
                     <tr>
-                        <td>Profit Display</td>
-                        <td>Changes how the graph is organized. ROI is calculated by dividing the profit by the expenses. Daily is calculated through the number of days set earlier.</td>
-                    </tr>
-					<tr>
-						<td>Max Seed Money</td>
-						<td>The maximum amount of money available in player's savings. This will limit how many crops can be planted when buying seeds.</td>
-					</tr>
-					<tr>
-						<td>Seed Sources</td>
-						<td>Seeds can be obtained at different locations and different locations always have different costs too. This option lets you check which sources the graph should be looking for. Note that the cheapest option will always be shown on the graph. Unselecting certain locations might hide no longer obtainable crops.</td>
-					</tr>
-					<tr>
-						<td>Pay For Seeds</td>
-						<td>Selecting this means that the player is buying the seeds from one of the sources, instead of producing the seeds themselves (like using the <em>Seed Maker</em>). An orange bar will be shown for every crop, showing the seed loss if selected.</td>
-					</tr>
-                    <tr>
-                        <td>Process & Replant</td>
-                        <td>Whether half of the harvest should be processed in a Seed Maker and replanted. Only affects crops which don't have a regrow time. Enabling this option also forces even number of planted crops. In case of Raw crops, ones with lower value will be reused for seeds first.</td>
+                        <td>陈酿等级</td>
+                        <td>选择酒桶产物在木桶中的陈酿等级（忽略所需时间）。例如啤酒花若要持续陈酿，则每天都需要新的木桶。</td>
                     </tr>
                     <tr>
-                        <td>Use Next Year</td>
-                        <td>Whether harvest should be processed for use next year. This will lower the profit of regrowing plants, as one harvest should be used to reserve seeds for next year. Can only be enabled if Process & Replant is enabled, and if Season is not set to Greenhouse.</td>
+                        <td>收益显示</td>
+                        <td>调整图表排序方式。投资回报率会以利润与支出比值计算，日收益则会除以设置的天数。</td>
                     </tr>
-					<tr>
-						<td>Fertilizer</td>
-						<td>Different fertilizers can either speed up growth or increase the Normal/Silver/Gold ratios. The type of fertilizer can be selected here.</td>
-					</tr>
-					<tr>
-						<td>Pay For Fertilizer</td>
-						<td>Selecting this means that the player is buying the fertilizer from one of the sources, instead of producing the fertilizer themselves (like crafting). A brown bar will be shown for every crop, showing the fertilizer loss if selected.</td>
-					</tr>
-					<tr>
-						<td>Speed-Gro Source</td>
-						<td>Sandy sells Deluxe Speed-Gro in the Oasis cheaper than Pierre. This option allows selecting the price used. This option is disabled unless the Pay for Fertilizer is selected and Deluxe Speed-Gro is selected.</td>
-					</tr>
-					<tr>
-						<td>Farming Level</td>
-						<td>The level of the player’s <em>Farming</em> skill. This has a direct impact to the Normal/Silver/Gold ratios of farmed items, but does not affect artisan goods.</td>
-					</tr>
-					<tr>
-						<td>Farming Level 5 Skill</td>
-						<td>The <em>Tilling</em> skill is available once the player reaches level 5 in <em>Farming</em>. This option is disabled unless the correct level is set.</td>
-					</tr>
-					<tr>
-						<td>Farming Level 10 Skill</td>
-						<td>Specific skills available once the player reaches level 10 in <em>Farming</em>. This option is disabled unless the correct level is set and unless <em>Tilling</em> is enabled under Level 5 skill.</td>
-					</tr>
+                                        <tr>
+                                                <td>种子预算上限</td>
+                                                <td>可用于购买种子的资金上限。启用购买种子后，会根据该上限限制可种植数量。</td>
+                                        </tr>
+                                        <tr>
+                                                <td>种子来源</td>
+                                                <td>勾选可用的购买渠道。不同渠道价格不同，会优先选用最便宜的来源。取消勾选可能导致无法获得的作物被隐藏。</td>
+                                        </tr>
+                                        <tr>
+                                                <td>购买种子</td>
+                                                <td>勾选代表通过上述渠道购买种子，而非自制种子（例如种子机）。启用后橙色区域会显示种子成本。</td>
+                                        </tr>
                     <tr>
-                        <td>Foraging Level</td>
-                        <td>The level of the player’s <em>Farming</em> skill. This has a direct impact to the Normal/Silver/Gold ratios of foraged items, but does not affect artisan goods.</td>
+                        <td>制作种子并再种</td>
+                        <td>将一半收获加工为种子并重新种植，仅影响不会再生的作物。启用后会强制种植数量为偶数，价值较低的作物会优先用于制种。</td>
                     </tr>
                     <tr>
-                        <td>Foraging Level 5 skill</td>
-                        <td>The <em>Gatherer</em> skill is available once the player reaches level 5 in <em>Foraging</em>. This option is disabled unless the correct level is set.</td>
+                        <td>留作来年</td>
+                        <td>保留一轮收获用于次年播种，仅对会再生的作物生效，需要先启用“制作种子并再种”，且季节不能为温室。</td>
+                    </tr>
+                                        <tr>
+                                                <td>肥料</td>
+                                                <td>选择使用的肥料。不同肥料会影响生长速度或品质概率。</td>
+                                        </tr>
+                                        <tr>
+                                                <td>购买肥料</td>
+                                                <td>勾选代表以金钱购买肥料，而非自行合成。启用后棕色区域会显示肥料成本。</td>
+                                        </tr>
+                                        <tr>
+                                                <td>速生肥来源</td>
+                                                <td>豪华速生肥在绿洲（桑迪）价格更低。仅当勾选购买肥料且选择豪华速生肥时可用。</td>
+                                        </tr>
+                                        <tr>
+                                                <td>耕种等级</td>
+                                                <td>玩家的耕种等级，会影响原作物的品质概率，但不影响手工制品。</td>
+                                        </tr>
+                                        <tr>
+                                                <td>耕种 5 级技能</td>
+                                                <td>“耕耘者”技能在耕种等级达到 5 级后可用，未达到前该选项会被禁用。</td>
+                                        </tr>
+                                        <tr>
+                                                <td>耕种 10 级技能</td>
+                                                <td>耕种等级达到 10 且选择“耕耘者”后可选“农学家”或“工匠”专精。</td>
+                                        </tr>
+                    <tr>
+                        <td>觅食等级</td>
+                        <td>玩家的觅食等级，会影响觅食作物的品质概率。</td>
                     </tr>
                     <tr>
-                        <td>Foraging Level 10 skill</td>
-                        <td>The <em>Botanist</em> skill is available once the player reaches level 10 in <em>Foraging</em>. This option is disabled unless the correct level is set and unless <em>Gatherer</em> is enabled under Level 5 skill.</td>
+                        <td>觅食 5 级技能</td>
+                        <td>“采集者”技能在觅食等级达到 5 级后可用。</td>
                     </tr>
                     <tr>
-                        <td>Farming Food Buff</td>
-                        <td>The consumable buff active on the player.</td>
+                        <td>觅食 10 级技能</td>
+                        <td>觅食等级达到 10 且选择“采集者”后可选“植物学家”。</td>
                     </tr>
-					<tr>
-						<td>Show Extra Info</td>
-						<td>Selecting this will show additional detailed info about every crop on the tooltip.</td>
-					</tr>
-					<tr>
-						<td>Disable Links</td>
-						<td>Selecting this will disable opening the Official Wiki when the bar graph is clicked.</td>
-					</tr>
-				</tbody>
-			</table>
-			<br />
-			<h1>Contact</h1>
-			<p>You may contact me on the following locations: <a href="https://twitter.com/thorinair_music" target="_blank">Twitter</a> | <a href="https://www.reddit.com/user/Thorinair/" target="_blank">Reddit</a> | <a href="https://www.youtube.com/user/Thorinair" target="_blank">YouTube</a> | <a href="http://thorinair.deviantart.com/" target="_blank">deviantArt</a>
-			<br />Project source code is available on <a href="https://github.com/Thorinair/Stardew-Profits" target="_blank">GitHub</a>.</p>
-			<div id="divhelp"><a href="index.html">Back</a></div>
-		</div>
+                    <tr>
+                        <td>耕种食物增益</td>
+                        <td>选择正在生效的耕种技能增益料理。</td>
+                    </tr>
+                                        <tr>
+                                                <td>显示额外信息</td>
+                                                <td>在提示卡中显示更详尽的作物数据。</td>
+                                        </tr>
+                                        <tr>
+                                                <td>禁用作物链接</td>
+                                                <td>勾选后点击柱状图不会再打开官方维基页面。</td>
+                                        </tr>
+                                </tbody>
+                        </table>
+                        <br />
+                        <h1>联系作者</h1>
+                        <p>如需反馈，可通过 <a href="https://twitter.com/thorinair_music" target="_blank">Twitter</a>、<a href="https://www.reddit.com/user/Thorinair/" target="_blank">Reddit</a>、<a href="https://www.youtube.com/user/Thorinair" target="_blank">YouTube</a> 或 <a href="http://thorinair.deviantart.com/" target="_blank">deviantArt</a> 联系 Thorinair。<br />项目源码托管于 <a href="https://github.com/Thorinair/Stardew-Profits" target="_blank">GitHub</a>。</p>
+                        <div id="divhelp"><a href="index.html">返回</a></div>
+                </div>
 
-		<div class="footer">
-            <p><a href="http://stardewvalley.net/" target="_blank">Stardew Valley v1.6.7</a> &copy; <a href="https://twitter.com/ConcernedApe" target="_blank">ConcernedApe</a> | Website designed by <a href="https://twitter.com/thorinair_music" target="_blank">Thorinair</a> | <a href="https://github.com/Thorinair/Stardew-Profits" target="_blank">Stardew Profits v1.6.11</a></p>
-		</div>
+                <div class="footer">
+            <p><a href="http://stardewvalley.net/" target="_blank">《星露谷物语》v1.6.7</a> &copy; <a href="https://twitter.com/ConcernedApe" target="_blank">ConcernedApe</a> | 网站设计：<a href="https://twitter.com/thorinair_music" target="_blank">Thorinair</a> | <a href="https://github.com/Thorinair/Stardew-Profits" target="_blank">Stardew Profits v1.6.11</a></p>
+                </div>
 
-		<script src="js/time.js"> </script>
-	</body>
+                <script src="js/time.js"> </script>
+        </body>
 </html>

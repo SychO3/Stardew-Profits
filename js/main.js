@@ -13,7 +13,7 @@ var barWidth = width / seasons[options.season].crops.length - barPadding;
 var miniBar = 8;
 var barOffsetX = 29;
 var barOffsetY = 40;
-var graphDescription = "Profit";
+var graphDescription = "收益";
 
 // Prepare web elements.
 var svg = d3.select("div.graph")
@@ -77,7 +77,7 @@ function harvests(cropID) {
 	var crop = seasons[options.season].crops[cropID];
 	var fertilizer = fertilizers[options.fertilizer];
 	// Tea blooms every day for the last 7 days of a season
-	var isTea = crop.name == "Tea Leaves";
+	var isTea = crop.name == "茶叶";
 
 	// if the crop is NOT cross season, remove 28 extra days for each extra season
 	var remainingDays = options.days - 28;
@@ -209,10 +209,10 @@ function levelRatio(fertilizer, level, isWildseed) {
  */
 function getKegModifier(crop) {
 	if (options.skills.arti) {
-		result = crop.produce.kegType == "Wine" ? 4.2 : 3.15;
+		result = crop.produce.kegType == "葡萄酒" ? 4.2 : 3.15;
 	}
 	else {
-		result = crop.produce.kegType == "Wine" ? 3 : 2.25;
+		result = crop.produce.kegType == "葡萄酒" ? 3 : 2.25;
 	}
 	
     return result;
@@ -260,8 +260,8 @@ function profit(crop) {
 	//var total_harvests = crop.harvests * num_planted;
 	var fertilizer = fertilizers[options.fertilizer];
 	var produce = options.produce;
-	var isTea = crop.name == "Tea Leaves";
-	var isCoffee = crop.name == "Coffee Bean";
+	var isTea = crop.name == "茶叶";
+	var isCoffee = crop.name == "咖啡豆";
 
     var useLevel = options.level;
     if (crop.isWildseed)
@@ -591,16 +591,16 @@ function valueCrops() {
 			cropList[i].drawProfit = cropList[i].averageProfit;
 			cropList[i].drawSeedLoss = cropList[i].averageSeedLoss;
 			cropList[i].drawFertLoss = cropList[i].averageFertLoss;
-			graphDescription = "Daily Profit"
+			graphDescription = "日收益"
 		}
 		else if ((options.average == 2) ){
 			if (options.buySeed || (options.buyFert && fertilizers[options.fertilizer].cost > 0)) {
 				cropList[i].drawProfit = cropList[i].totalReturnOnInvestment;
-				graphDescription = "Total Return On Investment";
+				graphDescription = "总投资回报率";
 			}
 			else {
 				cropList[i].drawProfit = 0;
-				graphDescription = "Total Profit (Choose an expense for ROI)";
+				graphDescription = "总收益（勾选成本后显示回报率）";
 			}
 			cropList[i].drawSeedLoss = cropList[i].seedLoss;
 			cropList[i].drawFertLoss = cropList[i].fertLoss;
@@ -610,18 +610,18 @@ function valueCrops() {
 			cropList[i].drawFertLoss = cropList[i].averageFertLoss;
 			if (options.buySeed || (options.buyFert && fertilizers[options.fertilizer].cost > 0)) {
 				cropList[i].drawProfit = cropList[i].averageReturnOnInvestment;
-				graphDescription = "Daily Return On Investment";
+				graphDescription = "每日投资回报率";
 			}
 			else {
 				cropList[i].drawProfit = 0;
-				graphDescription = "Daily Profit (Choose an expense for ROI)";
+				graphDescription = "日收益（勾选成本后显示回报率）";
 			}
 		}
 		else {
 			cropList[i].drawProfit = cropList[i].profit;
 			cropList[i].drawSeedLoss = cropList[i].seedLoss;
 			cropList[i].drawFertLoss = cropList[i].fertLoss;
-			graphDescription = "Total Profit";
+			graphDescription = "总收益";
 		}
 	}
 }
@@ -655,9 +655,9 @@ function sortCrops() {
  * @return The new scale.
  */
 function updateScaleX() {
-	return d3.scale.ordinal()
+	return d3.scaleBand()
 		.domain(d3.range(seasons[4].crops.length))
-		.rangeRoundBands([0, width]);
+		.rangeRound([0, width]).paddingInner(0).paddingOuter(0);
 }
 
 /*
@@ -665,7 +665,7 @@ function updateScaleX() {
  * @return The new scale.
  */
 function updateScaleY() {
-	return d3.scale.linear()
+	return d3.scaleLinear()
 		.domain([0, d3.max(cropList, function(d) {
 			if (d.drawProfit >= 0) {
 				return (~~((d.drawProfit + 99) / 100) * 100);
@@ -691,7 +691,7 @@ function updateScaleY() {
  * @return The new scale.
  */
 function updateScaleAxis() {
-	return d3.scale.linear()
+	return d3.scaleLinear()
 		.domain([
 			-d3.max(cropList, function(d) {
 				if (d.drawProfit >= 0) {
@@ -746,10 +746,8 @@ function renderGraph() {
 	svg.attr("width", width).style("padding-top", "12px");
 	d3.select(".graph").attr("width", width);
 
-	var yAxis = d3.svg.axis()
-		.scale(ax)
-		.orient("left")
-		.tickFormat(d3.format(",s"))
+        var yAxis = d3.axisLeft(ax)
+                .tickFormat(d3.format(","))
 		.ticks(16);
 
 	axisY = gAxis.attr("class", "axis")
@@ -845,7 +843,7 @@ function renderGraph() {
  	imgIcons = gIcons.selectAll("image")
 		.data(cropList)
 		.enter()
-		.append("svg:image")
+		.append("image")
 			.attr("x", function(d, i) { return x(i) + barOffsetX; })
 			.attr("y", function(d) {
 				if (d.drawProfit >= 0)
@@ -855,7 +853,7 @@ function renderGraph() {
 			})
 		    .attr('width', barWidth)
 		    .attr('height', barWidth)
-		    .attr("xlink:href", function(d) { return "img/" + d.img; });
+		    .attr("href", function(d) { return "img/" + d.img; });
 
 	barsTooltips = gTooltips.selectAll("rect")
 		.data(cropList)
@@ -903,7 +901,7 @@ function renderGraph() {
 			.attr("width", barWidth + barPadding)
  			.attr("opacity", "0")
  			.attr("cursor", "pointer")
-			.on("mouseover", function(d) {
+			.on("mouseover", function(event, d) {
 				tooltip.selectAll("*").remove();
 				tooltip.style("visibility", "visible");
 
@@ -916,7 +914,7 @@ function renderGraph() {
 
 
 				tooltipTr = tooltipTable.append("tr");
-				tooltipTr.append("td").attr("class", "tooltipTdLeft").text("Total profit:");
+				tooltipTr.append("td").attr("class", "tooltipTdLeft").text("总收益：");
 				if (d.profit > 0)
 					tooltipTr.append("td").attr("class", "tooltipTdRightPos").text("+" + formatNumber(d.profit))
 						.append("div").attr("class", "gold");
@@ -925,7 +923,7 @@ function renderGraph() {
 						.append("div").attr("class", "gold");
 
 				tooltipTr = tooltipTable.append("tr");
-				tooltipTr.append("td").attr("class", "tooltipTdLeft").text("Profit per day:");
+				tooltipTr.append("td").attr("class", "tooltipTdLeft").text("日收益：");
 				if (d.averageProfit > 0)
 					tooltipTr.append("td").attr("class", "tooltipTdRightPos").text("+" + formatNumber(d.averageProfit))
 						.append("div").attr("class", "gold");
@@ -935,14 +933,14 @@ function renderGraph() {
 
 				if (options.buySeed || options.buyFert) {
 				tooltipTr = tooltipTable.append("tr");
-				tooltipTr.append("td").attr("class", "tooltipTdLeft").text("Return on investment:");
+				tooltipTr.append("td").attr("class", "tooltipTdLeft").text("总回报率：");
 				if (d.totalReturnOnInvestment > 0)
 					tooltipTr.append("td").attr("class", "tooltipTdRightPos").text("+" + formatNumber(d.totalReturnOnInvestment) + "%");
 				else
 					tooltipTr.append("td").attr("class", "tooltipTdRightNeg").text(formatNumber(d.totalReturnOnInvestment) + "%");
 
 				tooltipTr = tooltipTable.append("tr");
-				tooltipTr.append("td").attr("class", "tooltipTdLeft").text("Return on investment per day:");
+				tooltipTr.append("td").attr("class", "tooltipTdLeft").text("日回报率：");
 				if (d.averageReturnOnInvestment > 0)
 					tooltipTr.append("td").attr("class", "tooltipTdRightPos").text("+" + formatNumber(d.averageReturnOnInvestment) + "%");
 				else
@@ -951,24 +949,24 @@ function renderGraph() {
 
 				if (options.buySeed) {
 					tooltipTr = tooltipTable.append("tr");
-					tooltipTr.append("td").attr("class", "tooltipTdLeftSpace").text("Total seed loss:");
+					tooltipTr.append("td").attr("class", "tooltipTdLeftSpace").text("种子总成本：");
 					tooltipTr.append("td").attr("class", "tooltipTdRightNeg").text(formatNumber(d.seedLoss))
 						.append("div").attr("class", "gold");
 
 					tooltipTr = tooltipTable.append("tr");
-					tooltipTr.append("td").attr("class", "tooltipTdLeft").text("Seed loss per day:");
+					tooltipTr.append("td").attr("class", "tooltipTdLeft").text("种子每日成本：");
 					tooltipTr.append("td").attr("class", "tooltipTdRightNeg").text(formatNumber(d.averageSeedLoss))
 						.append("div").attr("class", "gold");
 				}
 
 				if (options.buyFert) {
 					tooltipTr = tooltipTable.append("tr");
-					tooltipTr.append("td").attr("class", "tooltipTdLeftSpace").text("Total fertilizer loss:");
+					tooltipTr.append("td").attr("class", "tooltipTdLeftSpace").text("肥料总成本：");
 					tooltipTr.append("td").attr("class", "tooltipTdRightNeg").text(formatNumber(d.fertLoss))
 						.append("div").attr("class", "gold");
 
 					tooltipTr = tooltipTable.append("tr");
-					tooltipTr.append("td").attr("class", "tooltipTdLeft").text("Fertilizer loss per day:");
+					tooltipTr.append("td").attr("class", "tooltipTdLeft").text("肥料每日成本：");
 					tooltipTr.append("td").attr("class", "tooltipTdRightNeg").text(formatNumber(d.averageFertLoss))
 						.append("div").attr("class", "gold");
 				}
@@ -976,13 +974,13 @@ function renderGraph() {
 
 				//Ineligible crops are sold raw.
 				tooltipTr = tooltipTable.append("tr");
-				tooltipTr.append("td").attr("class", "tooltipTdLeftSpace").text("Produce sold:");
+				tooltipTr.append("td").attr("class", "tooltipTdLeftSpace").text("出售形式：");
 				switch (options.produce) {
 					case 0: 
-						tooltipTr.append("td").attr("class", "tooltipTdRight").text("Raw crops"); 
+						tooltipTr.append("td").attr("class", "tooltipTdRight").text("原物出售"); 
 						
 						tooltipTr = tooltipTable.append("tr");
-						tooltipTr.append("td").attr("class", "tooltipTdRight").text("Quantity sold:");
+						tooltipTr.append("td").attr("class", "tooltipTdRight").text("售出数量：");
 
 						if(d.profitData.quantitySold > 0 ){
 							tooltipTr.append("td").attr("class", "tooltipTdRight").text(d.profitData.quantitySold);
@@ -994,54 +992,54 @@ function renderGraph() {
 						if (d.produce.jarType != null){
 							tooltipTr.append("td").attr("class", "tooltipTdRight").text(d.produce.jarType);
 							tooltipTr = tooltipTable.append("tr");
-							tooltipTr.append("td").attr("class", "tooltipTdRight").text("Quantity sold:");
+							tooltipTr.append("td").attr("class", "tooltipTdRight").text("售出数量：");
 
                             if(d.profitData.quantitySold > 0 ){
                                 tooltipTr.append("td").attr("class", "tooltipTdRight").text(d.profitData.quantitySold);
                                 tooltipTr = tooltipTable.append("tr");
-                                tooltipTr.append("td").attr("class", "tooltipTdRight").text("Excess Produce:");
+                                tooltipTr.append("td").attr("class", "tooltipTdRight").text("剩余原料：");
                                 tooltipTr.append("td").attr("class", "tooltipTdRight").text(d.profitData.excessProduce);
                             }
                             else
                                 tooltipTr.append("td").attr("class", "tooltipTdRightNeg").text(d.profitData.quantitySold);
 						}
 						else if (options.sellRaw) {
-                            tooltipTr.append("td").attr("class", "tooltipTdRightNeg").text("Raw crops");
+                            tooltipTr.append("td").attr("class", "tooltipTdRightNeg").text("原物出售");
 							tooltipTr = tooltipTable.append("tr");
-							tooltipTr.append("td").attr("class", "tooltipTdRight").text("Quantity sold:");
+							tooltipTr.append("td").attr("class", "tooltipTdRight").text("售出数量：");
 							tooltipTr.append("td").attr("class", "tooltipTdRight").text(d.profitData.quantitySold);
 						}
                         else
-							tooltipTr.append("td").attr("class", "tooltipTdRightNeg").text("None");
+							tooltipTr.append("td").attr("class", "tooltipTdRightNeg").text("无");
 						break;
 					case 2:
 						if (d.produce.kegType != null){
 							tooltipTr.append("td").attr("class", "tooltipTdRight").text(d.produce.kegType);
 							tooltipTr = tooltipTable.append("tr");
-							tooltipTr.append("td").attr("class", "tooltipTdRight").text("Quantity sold:");
+							tooltipTr.append("td").attr("class", "tooltipTdRight").text("售出数量：");
 
                             if(d.profitData.quantitySold > 0 ){
                                 tooltipTr.append("td").attr("class", "tooltipTdRight").text(d.profitData.quantitySold);
                                 tooltipTr = tooltipTable.append("tr");
-                                tooltipTr.append("td").attr("class", "tooltipTdRight").text("Excess Produce:");
+                                tooltipTr.append("td").attr("class", "tooltipTdRight").text("剩余原料：");
                                 tooltipTr.append("td").attr("class", "tooltipTdRight").text(d.profitData.excessProduce);
                             }
                             else
                                 tooltipTr.append("td").attr("class", "tooltipTdRightNeg").text(d.profitData.quantitySold);
 						}
                         else if (options.sellRaw) {
-                            tooltipTr.append("td").attr("class", "tooltipTdRightNeg").text("Raw crops");
+                            tooltipTr.append("td").attr("class", "tooltipTdRightNeg").text("原物出售");
 							tooltipTr = tooltipTable.append("tr");
-							tooltipTr.append("td").attr("class", "tooltipTdRight").text("Quantity sold:");
+							tooltipTr.append("td").attr("class", "tooltipTdRight").text("售出数量：");
 							tooltipTr.append("td").attr("class", "tooltipTdRight").text(d.profitData.quantitySold);
 						}
 						else
-							tooltipTr.append("td").attr("class", "tooltipTdRightNeg").text("None");
+							tooltipTr.append("td").attr("class", "tooltipTdRightNeg").text("无");
 						break;
 					case 3: 
-						tooltipTr.append("td").attr("class", "tooltipTdRight").text("Seeds"); 
+						tooltipTr.append("td").attr("class", "tooltipTdRight").text("种子"); 
 						tooltipTr = tooltipTable.append("tr");
-						tooltipTr.append("td").attr("class", "tooltipTdRight").text("Quantity sold:");
+						tooltipTr.append("td").attr("class", "tooltipTdRight").text("售出数量：");
 
 						if(d.profitData.quantitySold > 0 ){
 							tooltipTr.append("td").attr("class", "tooltipTdRight").text(d.profitData.quantitySold);
@@ -1053,12 +1051,12 @@ function renderGraph() {
 						if (d.produce.dehydratorType != null){
 							tooltipTr.append("td").attr("class", "tooltipTdRight").text(d.produce.dehydratorType);
 							tooltipTr = tooltipTable.append("tr");
-							tooltipTr.append("td").attr("class", "tooltipTdRight").text("Quantity sold:");
+							tooltipTr.append("td").attr("class", "tooltipTdRight").text("售出数量：");
 
 							if(d.profitData.quantitySold > 0 ){
 								tooltipTr.append("td").attr("class", "tooltipTdRight").text(d.profitData.quantitySold);
 								tooltipTr = tooltipTable.append("tr");
-								tooltipTr.append("td").attr("class", "tooltipTdRight").text("Excess Produce:");
+								tooltipTr.append("td").attr("class", "tooltipTdRight").text("剩余原料：");
 								tooltipTr.append("td").attr("class", "tooltipTdRight").text(d.profitData.excessProduce);
 							}
 							else
@@ -1066,23 +1064,23 @@ function renderGraph() {
 							
 						}
 						else if (options.sellRaw){
-							tooltipTr.append("td").attr("class", "tooltipTdRightNeg").text("Raw crops");
+							tooltipTr.append("td").attr("class", "tooltipTdRightNeg").text("原物出售");
 							tooltipTr = tooltipTable.append("tr");
-							tooltipTr.append("td").attr("class", "tooltipTdRight").text("Quantity sold:");
+							tooltipTr.append("td").attr("class", "tooltipTdRight").text("售出数量：");
 							tooltipTr.append("td").attr("class", "tooltipTdRight").text(d.profitData.quantitySold);
 						}
 						else
-							tooltipTr.append("td").attr("class", "tooltipTdRightNeg").text("None");
+							tooltipTr.append("td").attr("class", "tooltipTdRightNeg").text("无");
 						break;
 				}
 				tooltipTr = tooltipTable.append("tr");
-				tooltipTr.append("td").attr("class", "tooltipTdLeft").text("Duration:");
-				tooltipTr.append("td").attr("class", "tooltipTdRight").text(options.days + " days");
+				tooltipTr.append("td").attr("class", "tooltipTdLeft").text("持续天数：");
+				tooltipTr.append("td").attr("class", "tooltipTdRight").text(options.days + " 天");
 				tooltipTr = tooltipTable.append("tr");
-				tooltipTr.append("td").attr("class", "tooltipTdLeft").text("Planted:");
+				tooltipTr.append("td").attr("class", "tooltipTdLeft").text("种植数量：");
 				tooltipTr.append("td").attr("class", "tooltipTdRight").text(d.planted);
 				tooltipTr = tooltipTable.append("tr");
-				tooltipTr.append("td").attr("class", "tooltipTdLeft").text("Harvests:");
+				tooltipTr.append("td").attr("class", "tooltipTdLeft").text("收获次数：");
 				tooltipTr.append("td").attr("class", "tooltipTdRight").text(d.harvests);
 
 				if (options.extra) {
@@ -1098,34 +1096,34 @@ function renderGraph() {
                     else
                         initialGrow += Math.floor(d.growth.initial * fertilizer.growth);
 
-					tooltip.append("h3").attr("class", "tooltipTitleExtra").text("Crop info");
+					tooltip.append("h3").attr("class", "tooltipTitleExtra").text("作物信息");
 					tooltipTable = tooltip.append("table")
 						.attr("class", "tooltipTable")
 						.attr("cellspacing", 0);
 
                     if (!(d.isWildseed && options.skills.botanist)) {
     					tooltipTr = tooltipTable.append("tr");
-    					tooltipTr.append("td").attr("class", "tooltipTdLeft").text("Value (Normal):");
+    					tooltipTr.append("td").attr("class", "tooltipTdLeft").text("售价（普通）：");
     					tooltipTr.append("td").attr("class", "tooltipTdRight").text(d.produce.price)
     						.append("div").attr("class", "gold");
                         tooltipTr.append("td").attr("class", "tooltipTdRight").text("(" + (d.profitData.ratioN*100).toFixed(0) + "%)");
                     }
-					if (d.name != "Tea Leaves") {
+					if (d.name != "茶叶") {
                         if (!(d.isWildseed && options.skills.botanist)) {
     						tooltipTr = tooltipTable.append("tr");
-    						tooltipTr.append("td").attr("class", "tooltipTdLeft").text("Value (Silver):");
+    						tooltipTr.append("td").attr("class", "tooltipTdLeft").text("售价（银星）：");
     						tooltipTr.append("td").attr("class", "tooltipTdRight").text(Math.trunc(d.produce.price * 1.25))
     							.append("div").attr("class", "gold");
                             tooltipTr.append("td").attr("class", "tooltipTdRight").text("(" + (d.profitData.ratioS*100).toFixed(0) + "%)");
     						tooltipTr = tooltipTable.append("tr");
-    						tooltipTr.append("td").attr("class", "tooltipTdLeft").text("Value (Gold):");
+    						tooltipTr.append("td").attr("class", "tooltipTdLeft").text("售价（金星）：");
     						tooltipTr.append("td").attr("class", "tooltipTdRight").text(Math.trunc(d.produce.price * 1.5))
     							.append("div").attr("class", "gold");
                             tooltipTr.append("td").attr("class", "tooltipTdRight").text("(" + (d.profitData.ratioG*100).toFixed(0) + "%)");
                         }
                         if ((!d.isWildseed && fertilizers[options.fertilizer].ratio >= 3) || (d.isWildseed && options.skills.botanist)) {
     						tooltipTr = tooltipTable.append("tr");
-    						tooltipTr.append("td").attr("class", "tooltipTdLeft").text("Value (Iridium):");
+    						tooltipTr.append("td").attr("class", "tooltipTdLeft").text("售价（铱星）：");
     						tooltipTr.append("td").attr("class", "tooltipTdRight").text(d.produce.price * 2)
     							.append("div").attr("class", "gold");
                             tooltipTr.append("td").attr("class", "tooltipTdRight").text("(" + (d.profitData.ratioI*100).toFixed(0) + "%)");
@@ -1133,36 +1131,36 @@ function renderGraph() {
 					}
 					tooltipTr = tooltipTable.append("tr");
 					if (d.produce.jarType) {
-						tooltipTr.append("td").attr("class", "tooltipTdLeftSpace").text("Value (" + d.produce.jarType + "):");
+						tooltipTr.append("td").attr("class", "tooltipTdLeftSpace").text("售价（" + d.produce.jarType + "）：");
 						tooltipTr.append("td").attr("class", "tooltipTdRight").text(d.produce.price * 2 + 50)
 						.append("div").attr("class", "gold");
 					}
 					else {
-						tooltipTr.append("td").attr("class", "tooltipTdLeftSpace").text("Value (Jar):");
-						tooltipTr.append("td").attr("class", "tooltipTdRight").text("None");
+						tooltipTr.append("td").attr("class", "tooltipTdLeftSpace").text("售价（腌制罐）：");
+						tooltipTr.append("td").attr("class", "tooltipTdRight").text("无");
 					}
 					tooltipTr = tooltipTable.append("tr");
 					if (d.produce.kegType) {
-						tooltipTr.append("td").attr("class", "tooltipTdLeft").text("Value (" + d.produce.kegType + "):");
+						tooltipTr.append("td").attr("class", "tooltipTdLeft").text("售价（" + d.produce.kegType + "）：");
 						tooltipTr.append("td").attr("class", "tooltipTdRight").text(Math.round(kegPrice))
 						.append("div").attr("class", "gold");
 					}
 					else {
-						tooltipTr.append("td").attr("class", "tooltipTdLeft").text("Value (Keg):");
-						tooltipTr.append("td").attr("class", "tooltipTdRight").text("None");
+						tooltipTr.append("td").attr("class", "tooltipTdLeft").text("售价（酒桶）：");
+						tooltipTr.append("td").attr("class", "tooltipTdRight").text("无");
 					}
 					tooltipTr = tooltipTable.append("tr");
 					if (d.produce.dehydratorType) {
-						tooltipTr.append("td").attr("class", "tooltipTdLeft").text("Value (" + d.produce.dehydratorType + "):");
+						tooltipTr.append("td").attr("class", "tooltipTdLeft").text("售价（" + d.produce.dehydratorType + "）：");
 						tooltipTr.append("td").attr("class", "tooltipTdRight").text(dehydratorModifierByCrop)
 						.append("div").attr("class", "gold");
 					}
 					else {
-						tooltipTr.append("td").attr("class", "tooltipTdLeft").text("Value (Dehydrator):");
-						tooltipTr.append("td").attr("class", "tooltipTdRight").text("None");
+						tooltipTr.append("td").attr("class", "tooltipTdLeft").text("售价（脱水机）：");
+						tooltipTr.append("td").attr("class", "tooltipTdRight").text("无");
 					}
                     tooltipTr = tooltipTable.append("tr");
-                    tooltipTr.append("td").attr("class", "tooltipTdLeft").text("Value (Seeds):");
+                    tooltipTr.append("td").attr("class", "tooltipTdLeft").text("售价（种子）：");
                     tooltipTr.append("td").attr("class", "tooltipTdRight").text(seedPrice)
                     .append("div").attr("class", "gold");
 
@@ -1170,7 +1168,7 @@ function renderGraph() {
 					var first = true;
 					if (d.seeds.pierre > 0) {
 						tooltipTr = tooltipTable.append("tr");
-						tooltipTr.append("td").attr("class", "tooltipTdLeftSpace").text("Seeds (Pierre):");
+						tooltipTr.append("td").attr("class", "tooltipTdLeftSpace").text("种子（皮埃尔）：");
 						first = false;
 						tooltipTr.append("td").attr("class", "tooltipTdRight").text(d.seeds.pierre)
 						.append("div").attr("class", "gold");
@@ -1178,22 +1176,22 @@ function renderGraph() {
 					if (d.seeds.joja > 0) {
 						tooltipTr = tooltipTable.append("tr");
 						if (first) {
-							tooltipTr.append("td").attr("class", "tooltipTdLeftSpace").text("Seeds (Joja):");
+							tooltipTr.append("td").attr("class", "tooltipTdLeftSpace").text("种子（Joja）：");
 							first = false;
 						}
 						else
-							tooltipTr.append("td").attr("class", "tooltipTdLeft").text("Seeds (Joja):");
+							tooltipTr.append("td").attr("class", "tooltipTdLeft").text("种子（Joja）：");
 						tooltipTr.append("td").attr("class", "tooltipTdRight").text(d.seeds.joja)
 						.append("div").attr("class", "gold");
 					}
 					if (d.seeds.special > 0) {
 						tooltipTr = tooltipTable.append("tr");
 						if (first) {
-							tooltipTr.append("td").attr("class", "tooltipTdLeftSpace").text("Seeds (Special):");
+							tooltipTr.append("td").attr("class", "tooltipTdLeftSpace").text("种子（特殊）：");
 							first = false;
 						}
 						else
-							tooltipTr.append("td").attr("class", "tooltipTdLeft").text("Seeds (Special):");
+							tooltipTr.append("td").attr("class", "tooltipTdLeft").text("种子（特殊）：");
 						tooltipTr.append("td").attr("class", "tooltipTdRight").text(d.seeds.special)
 						.append("div").attr("class", "gold");
 						tooltipTr = tooltipTable.append("tr");
@@ -1202,20 +1200,20 @@ function renderGraph() {
 					}
 
 					tooltipTr = tooltipTable.append("tr");
-					tooltipTr.append("td").attr("class", "tooltipTdLeftSpace").text("Time to grow:");
-					tooltipTr.append("td").attr("class", "tooltipTdRight").text(initialGrow + " days");
+					tooltipTr.append("td").attr("class", "tooltipTdLeftSpace").text("初次生长：");
+					tooltipTr.append("td").attr("class", "tooltipTdRight").text(initialGrow + " 天");
 					tooltipTr = tooltipTable.append("tr");
-					tooltipTr.append("td").attr("class", "tooltipTdLeft").text("Time to regrow:");
+					tooltipTr.append("td").attr("class", "tooltipTdLeft").text("再生周期：");
 					if (d.growth.regrow > 0)
-						tooltipTr.append("td").attr("class", "tooltipTdRight").text(d.growth.regrow + " days");
+						tooltipTr.append("td").attr("class", "tooltipTdRight").text(d.growth.regrow + " 天");
 					else
-						tooltipTr.append("td").attr("class", "tooltipTdRight").text("N/A");
+						tooltipTr.append("td").attr("class", "tooltipTdRight").text("不适用");
 					if (d.produce.extra > 0) {
 						tooltipTr = tooltipTable.append("tr");
-						tooltipTr.append("td").attr("class", "tooltipTdLeft").text("Extra produce:");
+						tooltipTr.append("td").attr("class", "tooltipTdLeft").text("额外产物：");
 						tooltipTr.append("td").attr("class", "tooltipTdRight").text(d.produce.extra);
 						tooltipTr = tooltipTable.append("tr");
-						tooltipTr.append("td").attr("class", "tooltipTdLeft").text("Extra chance:");
+						tooltipTr.append("td").attr("class", "tooltipTdLeft").text("额外概率：");
 						tooltipTr.append("td").attr("class", "tooltipTdRight").text((d.produce.extraPerc * 100) + "%");
 					}
 
@@ -1223,11 +1221,11 @@ function renderGraph() {
 
 				}
 			})
-			.on("mousemove", function() {
-				tooltip.style("top", (d3.event.pageY - 16) + "px").style("left",(d3.event.pageX + 20) + "px");
+			.on("mousemove", function(event) {
+				tooltip.style("top", (event.pageY - 16) + "px").style("left",(event.pageX + 20) + "px");
 			})
 			.on("mouseout", function() { tooltip.style("visibility", "hidden"); })
-			.on("click", function(d) { 
+			.on("click", function(event, d) { 
 				if(!options.disableLinks)
 					window.open(d.url, "_blank"); 
 			});
@@ -1242,10 +1240,8 @@ function updateGraph() {
 	var y = updateScaleY();
 	var ax = updateScaleAxis();
 
-	var yAxis = d3.svg.axis()
-		.scale(ax)
-		.orient("left")
-		.tickFormat(d3.format(",s"))
+        var yAxis = d3.axisLeft(ax)
+                .tickFormat(d3.format(","))
 		.ticks(16);
 
 	axisY.transition()
@@ -1342,7 +1338,7 @@ function updateGraph() {
 			})
 		    .attr('width', barWidth)
 		    .attr('height', barWidth)
-		    .attr("xlink:href", function(d) { return "img/" + d.img; });
+		    .attr("href", function(d) { return "img/" + d.img; });
 
 	barsTooltips.data(cropList)
 		.transition()
@@ -1390,16 +1386,16 @@ function updateGraph() {
 
 function updateSeasonNames() {
     if (options.crossSeason) {
-        document.getElementById('season_0').innerHTML = "Spring & Summer";
-        document.getElementById('season_1').innerHTML = "Summer & Fall";
-        document.getElementById('season_2').innerHTML = "Fall & Winter";
-        document.getElementById('season_3').innerHTML = "Winter & Spring";
+        document.getElementById('season_0').innerHTML = "春夏";
+        document.getElementById('season_1').innerHTML = "夏秋";
+        document.getElementById('season_2').innerHTML = "秋冬";
+        document.getElementById('season_3').innerHTML = "冬春";
     }
     else {
-        document.getElementById('season_0').innerHTML = "Spring";
-        document.getElementById('season_1').innerHTML = "Summer";
-        document.getElementById('season_2').innerHTML = "Fall";
-        document.getElementById('season_3').innerHTML = "Winter";
+        document.getElementById('season_0').innerHTML = "春季";
+        document.getElementById('season_1').innerHTML = "夏季";
+        document.getElementById('season_2').innerHTML = "秋季";
+        document.getElementById('season_3').innerHTML = "冬季";
     }
 }
 
