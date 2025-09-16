@@ -748,6 +748,7 @@ function renderGraph() {
 
         var yAxis = d3.axisLeft(ax)
                 .tickFormat(d3.format(","))
+
 		.ticks(16);
 
 	axisY = gAxis.attr("class", "axis")
@@ -1242,6 +1243,7 @@ function updateGraph() {
 
         var yAxis = d3.axisLeft(ax)
                 .tickFormat(d3.format(","))
+
 		.ticks(16);
 
 	axisY.transition()

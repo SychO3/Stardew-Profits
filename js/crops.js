@@ -1,7 +1,6 @@
 /*
  * All data gathered from a modified version of polarstoat/stardew-crop-data
  */
-
 // Crop List
 var crops = {
   "carrot": {
