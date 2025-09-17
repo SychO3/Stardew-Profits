@@ -12,8 +12,8 @@ var crops = {
       "pierre": 0,  // 杂货店(皮埃尔) 价格
       "joja": 0,  // Joja超市 价格
       "special": 0,  // 特殊商店 价格
-      "specialLoc": "无法购买",  // 购买地点
-      "specialUrl": "https://zh.stardewvalleywiki.com/胡萝卜种子" // 种子维基链接
+      "specialLoc": "狸猫（用1个枫树种子交换）",  // 购买地点
+      "specialUrl": "https://zh.stardewvalleywiki.com/狸猫" // 种子维基链接
     },
     "growth": {  // 生长信息
       "initial": 3,  // 初始生长天数
@@ -36,8 +36,8 @@ var crops = {
       "pierre": 0,
       "joja": 0,
       "special": 0,
-      "specialLoc": "无法购买",
-      "specialUrl": "https://zh.stardewvalleywiki.com/金皮西葫芦种子"
+      "specialLoc": "狸猫（用15个树液交换）",
+      "specialUrl": "https://zh.stardewvalleywiki.com/狸猫"
     },
     "growth": {
       "initial": 6,
@@ -60,8 +60,8 @@ var crops = {
       "pierre": 0,
       "joja": 0,
       "special": 0,
-      "specialLoc": "无法购买",
-      "specialUrl": "https://zh.stardewvalleywiki.com/西蓝花种子"
+      "specialLoc": "狸猫（用5个苔藓交换）",
+      "specialUrl": "https://zh.stardewvalleywiki.com/狸猫"
     },
     "growth": {
       "initial": 8,
@@ -84,8 +84,8 @@ var crops = {
       "pierre": 0,
       "joja": 0,
       "special": 0,
-      "specialLoc": "无法购买",
-      "specialUrl": "https://zh.stardewvalleywiki.com/霜瓜种子"
+      "specialLoc": "狸猫（用2个松果交换）",
+      "specialUrl": "https://zh.stardewvalleywiki.com/狸猫"
     },
     "growth": {
       "initial": 7,
@@ -94,7 +94,7 @@ var crops = {
     "produce": {
       "extra": 0,
       "extraPerc": 0,
-      "price": 70,
+      "price": 60,
       "jarType": "果酱",
       "kegType": "葡萄酒",
       "dehydratorType": "干果"
@@ -339,7 +339,7 @@ var crops = {
     "url": "https://zh.stardewvalleywiki.com/咖啡豆",
     "img": "coffeebean.png",
     "seeds": {
-      "sell": 0,
+      "sell": 15,
       "pierre": 0,
       "joja": 0,
       "special": 2500,
@@ -588,7 +588,7 @@ var crops = {
     },
     "produce": {
       "extra": 1,
-      "extraPerc": 0.11,
+      "extraPerc": 0.1,
       "price": 30,
       "jarType": "腌菜",
       "kegType": "果汁"
@@ -965,7 +965,7 @@ var crops = {
     "url": "https://zh.stardewvalleywiki.com/蔓越莓",
     "img": "cranberries.png",
     "seeds": {
-      "sell": 60,
+      "sell": 120,
       "pierre": 240,
       "joja": 300,
       "special": 0,
