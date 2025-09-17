@@ -15,13 +15,47 @@
 
                 <div class="changes">
                         <h1>更新记录</h1>
+            <h2>v1.6.15 <div class="date">(2025-09-17)</div></h2>
+            <ul>
+                <li>与官方规则对齐：
+                    <ul>
+                        <li>木桶（陈酿）只对 葡萄酒/啤酒/淡啤酒/蜂蜜酒 生效，并使用官方倍率：银 1.25、金 1.5、铱 2.0；不再与工匠加成重复叠加。</li>
+                        <li>耕作加成（耕作人/Tiller +10%）不再作用于采集类作物。</li>
+                    </ul>
+                </li>
+                <li>ROI/坐标轴大幅改进：
+                    <ul>
+                        <li>总/每日回报率在未勾选购买成本时也可计算与显示，悬浮层始终展示回报率。</li>
+                        <li>ROI 视图的纵轴按百分比自适应步长（5/10/20/25/50/100/…），根据最小/最大值定标，修复 300%、500% 等异常刻度。</li>
+                        <li>黄色成本条在 ROI 模式下转换为“成本占收入的百分比”，与绿色 ROI 同单位；坐标轴同时考虑 ROI 与成本百分比，避免被裁切。</li>
+                        <li>货币视图加入自适应步长（1/2/5/10/…/500/1000…），小数值时不再固定 500，细节更清晰；大数值自动使用 k 显示。</li>
+                    </ul>
+                </li>
+                <li>烘干机/收获批次：
+                    <ul>
+                        <li>修复“按收获批次”时单次不足 5 个始终为 0 的问题——现在跨收获累积余量，并受每次收获设备上限限制。</li>
+                        <li>支持本地化名称（“果干/葡萄干/Dried Fruit”）的价目识别。</li>
+                    </ul>
+                </li>
+                <li>采集体系：
+                    <ul>
+                        <li>在不修改自动生成数据的前提下，前端推断常见采集物，使“采集者/植物学家/采集等级与食物增益”正确生效。</li>
+                    </ul>
+                </li>
+                <li>图表/体验：
+                    <ul>
+                        <li>轴与柱使用统一比例尺，修复 ROI 柱高度与刻度不一致的问题；避免标题与刻度遮挡。</li>
+                        <li>提示卡信息优化：手工品价格与陈酿价格按官方规则计算显示。</li>
+                    </ul>
+                </li>
+            </ul>
             <h2>v1.6.11 <div class="date">(2024-06-15)</div></h2>
             <ul>
-                <li>修复工匠技能未正确应用于腌制罐、木桶和酒桶的问题。<a href="https://github.com/Thorinair/Stardew-Profits/issues/77" target="_blank">[Issue #77]</a></li>
+                <li>修复工匠技能未正确应用于罐头瓶、木桶和酒桶的问题。<a href="https://github.com/Thorinair/Stardew-Profits/issues/77" target="_blank">[Issue #77]</a></li>
             </ul>
             <h2>v1.6.10 <div class="date">(2024-06-06)</div></h2>
             <ul>
-                <li>加入脱水机的收益计算。<a href="https://github.com/Thorinair/Stardew-Profits/pull/68" target="_blank">[Pull Request #69]</a> <a href="https://github.com/Thorinair/Stardew-Profits/pull/73" target="_blank">[Pull Request #73]</a> <a href="https://github.com/Thorinair/Stardew-Profits/pull/74" target="_blank">[Pull Request #74]</a></li>
+                <li>加入烘干机的收益计算。<a href="https://github.com/Thorinair/Stardew-Profits/pull/68" target="_blank">[Pull Request #69]</a> <a href="https://github.com/Thorinair/Stardew-Profits/pull/73" target="_blank">[Pull Request #73]</a> <a href="https://github.com/Thorinair/Stardew-Profits/pull/74" target="_blank">[Pull Request #74]</a></li>
                 <li>新增“剩余产出”选项，当勾选“改为出售原物”时，剩余作物会按原价出售。</li>
                 <li>根据所选手工品类型自动隐藏无关选项，以保持界面简洁。<a href="https://github.com/Thorinair/Stardew-Profits/pull/74" target="_blank">[Pull Request #74]</a></li>
                 <li>微调选项布局，使其更紧凑顺手。</li>
@@ -49,7 +83,7 @@
             </ul>
             <h2>v1.6.5 <div class="date">(2024-04-11)</div></h2>
             <ul>
-                <li>修复腌制罐产值错误并误显示为酒桶数值的问题。</li>
+                <li>修复罐头瓶产值错误并误显示为酒桶数值的问题。</li>
                 <li>修正部分酒桶价格计算不准确的情况。</li>
             </ul>
             <h2>v1.6.4 <div class="date">(2024-04-03)</div></h2>
@@ -80,7 +114,7 @@
                 <li>加入《星露谷物语》1.6 版本新增的作物与种子。<a href="https://github.com/Thorinair/Stardew-Profits/pull/58" target="_blank">[Pull Request #58]</a></li>
                 <li>新增投资回报率（ROI）计算。<a href="https://github.com/Thorinair/Stardew-Profits/pull/54" target="_blank">[Pull Request #54]</a></li>
                 <li>调高马铃薯价格，使其更加精确。<a href="https://github.com/Thorinair/Stardew-Profits/pull/55" target="_blank">[Pull Request #55]</a></li>
-                <li>新增“设备数量”选项，可设定腌制罐或酒桶数量。<a href="https://github.com/Thorinair/Stardew-Profits/issues/33" target="_blank">[Issue #33]</a></li>
+                <li>新增“设备数量”选项，可设定罐头瓶或酒桶数量。<a href="https://github.com/Thorinair/Stardew-Profits/issues/33" target="_blank">[Issue #33]</a></li>
                 <li>新增“陈酿等级”选项，仅在选择酒桶产出时可用。<a href="https://github.com/Thorinair/Stardew-Profits/issues/52" target="_blank">[Issue #52]</a></li>
                 <li>新增“种子”作为产出类型，可用于出售种子机产物。<a href="https://github.com/Thorinair/Stardew-Profits/issues/21" target="_blank">[Issue #21]</a></li>
                 <li>将远古水果种子设定为无法购买。<a href="https://github.com/Thorinair/Stardew-Profits/issues/60" target="_blank">[Issue #60]</a></li>
@@ -92,7 +126,7 @@
                 </div>
 
                 <div class="footer">
-            <p><a href="http://stardewvalley.net/" target="_blank">《星露谷物语》v1.6.7</a> &copy; <a href="https://twitter.com/ConcernedApe" target="_blank">ConcernedApe</a> | 网站设计：<a href="https://twitter.com/thorinair_music" target="_blank">Thorinair</a> | <a href="https://github.com/Thorinair/Stardew-Profits" target="_blank">Stardew Profits v1.6.11</a></p>
+            <p><a href="http://stardewvalley.net/" target="_blank">《星露谷物语》v1.6.15</a></p>
                 </div>
 
                 <script src="js/time.js"> </script>

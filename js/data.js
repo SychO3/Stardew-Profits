@@ -45,38 +45,38 @@ var fertilizers = [
 		"cost": 0
 	},
 	{
-		"name": "基础肥料",
+		"name": "初级肥料",
 		"ratio": 1,
 		"growth": 1,
 		"cost": 100
 	},
 	{
-		"name": "优质肥料",
+		"name": "高级肥料",
 		"ratio": 2,
 		"growth": 1,
 		"cost": 150
 	},
 	{
-		"name": "速生肥",
+		"name": "生长激素",
 		"ratio": 0,
 		"growth": 0.9,
 		"cost": 100
 	},
 	{
-		"name": "豪华速生肥",
+		"name": "高级生长激素",
 		"ratio": 0,
 		"growth": 0.75,
 		"cost": 150,
 		"alternate_cost": 80
 	},
 	{
-		"name": "豪华肥料",
+		"name": "顶级肥料",
 		"ratio": 3,
 		"growth": 1,
 		"cost": 0
 	},
 	{
-		"name": "特级速生肥",
+		"name": "顶级生长激素",
 		"ratio": 0,
 		"growth": 0.67,
 		"cost": 0

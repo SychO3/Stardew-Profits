@@ -32,6 +32,8 @@ body {
 	fill: #eeeeee;
 }
 
+.axis text { fill: #eeeeee !important; }
+
 .axis path, .axis line {
 	fill: none;
 	stroke: #eeeeee;
