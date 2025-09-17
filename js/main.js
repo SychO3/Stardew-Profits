@@ -1471,8 +1471,10 @@ function renderGraph() {
 			})
 			.on("mouseout", function() { tooltip.style("visibility", "hidden"); })
 			.on("click", function(event, d) { 
-				if(!options.disableLinks)
-					window.open(d.url, "_blank"); 
+				if(!options.disableLinks) {
+					var w = window.open(d.url, "_blank", "noopener,noreferrer");
+					if (w) { try { w.opener = null; } catch (e) {} }
+				}
 			});
 
 	// Keep axis and title drawn above bars and icons
