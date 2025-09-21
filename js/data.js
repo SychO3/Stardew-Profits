@@ -15,7 +15,10 @@ var options = {
     "replant": false,
     "nextyear": false,
 	"buyFert": false,
-	"average": false,
+	"average": 0,
+    "roiSymmetric": true,
+    "roiCostMode": 0,
+    "sortMode": 0,
     "fertilizer": 2,
     "fertilizerSource": 0,
 	"seeds": {

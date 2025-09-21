@@ -118,6 +118,36 @@
                 </td>
             </tr>
 
+            <tr id="tr_roi_axis" class="hidden">
+                <td>ROI 轴：</td>
+                <td><input type="checkbox" id="check_roi_symmetric" onChange="refresh()" checked /> 对称刻度</td>
+            </tr>
+
+            <tr id="tr_roi_costmode" class="hidden">
+                <td>ROI 成本显示：</td>
+                <td>
+                    <select id="select_roi_costmode" onChange="refresh()">
+                        <option value="0" selected="true">百分比成本</option>
+                        <option value="1">绝对成本</option>
+                    </select>
+                </td>
+            </tr>
+
+            <tr>
+                <td>排序方式：</td>
+                <td>
+                    <select id="select_sort" onChange="refresh()">
+                        <option value="0" selected="true">按当前视图</option>
+                        <option value="1">总收益</option>
+                        <option value="2">日收益</option>
+                        <option value="3">总ROI</option>
+                        <option value="4">日ROI</option>
+                        <option value="5">回本天数</option>
+                        <option value="6">单位设备收益</option>
+                    </select>
+                </td>
+            </tr>
+
             <tr>
                 <td>种子预算上限：</td>
                 <td><input type="number" id="max_seed_money" value="0" onChange="refresh()"/></td>

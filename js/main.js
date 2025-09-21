@@ -679,7 +679,7 @@ function profit(crop) {
     // Determine total profit (with current buy options)
     totalProfit = netIncome + netExpenses;
 
-    // ROI should be meaningful even未勾选“购买成本”，因此按种子+肥料的理论成本计算
+    // ROI should be meaningful even未勾选"购买成本"，因此按种子+肥料的理论成本计算
     var roiExpenses = seedLoss(crop) + fertLoss(crop); // 两者均为负值（支出）
     if (roiExpenses != 0) {
         totalReturnOnInvestment = 100 * ((netIncome + roiExpenses) / -roiExpenses);
@@ -834,16 +834,20 @@ function valueCrops() {
 		}
         else if ((options.average == 2) ){
             cropList[i].drawProfit = cropList[i].totalReturnOnInvestment;
-            // Convert losses to percent of investment (negative percent)
             var roiDen = -(cropList[i].seedLoss + cropList[i].fertLoss);
-            if (roiDen > 0) {
-                var seedShare = Math.max(0, -cropList[i].seedLoss) / roiDen;
-                var fertShare = Math.max(0, -cropList[i].fertLoss) / roiDen;
-                cropList[i].drawSeedLoss = -seedShare * 100;
-                cropList[i].drawFertLoss = -fertShare * 100;
+            if (options.roiCostMode == 1) {
+                cropList[i].drawSeedLoss = options.buySeed ? cropList[i].seedLoss : 0;
+                cropList[i].drawFertLoss = options.buyFert ? cropList[i].fertLoss : 0;
             } else {
-                cropList[i].drawSeedLoss = 0;
-                cropList[i].drawFertLoss = 0;
+                if (roiDen > 0) {
+                    var seedShare = Math.max(0, -cropList[i].seedLoss) / roiDen;
+                    var fertShare = Math.max(0, -cropList[i].fertLoss) / roiDen;
+                    cropList[i].drawSeedLoss = -seedShare * 100;
+                    cropList[i].drawFertLoss = -fertShare * 100;
+                } else {
+                    cropList[i].drawSeedLoss = 0;
+                    cropList[i].drawFertLoss = 0;
+                }
             }
             graphDescription = "总投资回报率";
         }
@@ -852,14 +856,19 @@ function valueCrops() {
             roiDiv = Math.max(1, roiDiv);
             cropList[i].drawProfit = cropList[i].averageReturnOnInvestment;
             var roiDen = -(cropList[i].seedLoss + cropList[i].fertLoss);
-            if (roiDen > 0) {
-                var seedShare = Math.max(0, -cropList[i].seedLoss) / roiDen;
-                var fertShare = Math.max(0, -cropList[i].fertLoss) / roiDen;
-                cropList[i].drawSeedLoss = -(seedShare * 100) / roiDiv;
-                cropList[i].drawFertLoss = -(fertShare * 100) / roiDiv;
+            if (options.roiCostMode == 1) {
+                cropList[i].drawSeedLoss = options.buySeed ? cropList[i].averageSeedLoss : 0;
+                cropList[i].drawFertLoss = options.buyFert ? cropList[i].averageFertLoss : 0;
             } else {
-                cropList[i].drawSeedLoss = 0;
-                cropList[i].drawFertLoss = 0;
+                if (roiDen > 0) {
+                    var seedShare = Math.max(0, -cropList[i].seedLoss) / roiDen;
+                    var fertShare = Math.max(0, -cropList[i].fertLoss) / roiDen;
+                    cropList[i].drawSeedLoss = -(seedShare * 100) / roiDiv;
+                    cropList[i].drawFertLoss = -(fertShare * 100) / roiDiv;
+                } else {
+                    cropList[i].drawSeedLoss = 0;
+                    cropList[i].drawFertLoss = 0;
+                }
             }
             graphDescription = "每日投资回报率";
         }
@@ -876,14 +885,41 @@ function valueCrops() {
  * Sorts the cropList array, so that the most profitable crop is the first one.
  */
 function sortCrops() {
-	// Stable sort by drawProfit (desc). Use original index as a tiebreaker.
-	for (var i = 0; i < cropList.length; i++) cropList[i]._origIndex = i;
-	cropList.sort(function(a, b) {
-		var diff = (b.drawProfit || 0) - (a.drawProfit || 0);
-		if (diff !== 0) return diff;
-		return (a._origIndex || 0) - (b._origIndex || 0);
-	});
-	for (var j = 0; j < cropList.length; j++) delete cropList[j]._origIndex;
+    // Stable sort based on selected mode; default: current view metric
+    for (var i = 0; i < cropList.length; i++) cropList[i]._origIndex = i;
+
+    function keyFor(c) {
+        switch (options.sortMode|0) {
+            case 1: return c.profit; // total profit
+            case 2: return c.averageProfit; // profit/day
+            case 3: return c.totalReturnOnInvestment; // ROI total
+            case 4: return c.averageReturnOnInvestment; // ROI per day
+            case 5: {
+                // payback days: lower is better; Infinity if never pays back
+                var invest = -(c.seedLoss + c.fertLoss);
+                var daily = c.averageProfit;
+                if (invest <= 0 || daily <= 0) return -Infinity;
+                return -(invest / daily); // negate to sort ascending
+            }
+            case 6: {
+                // per equipment yield (if equipment limited), fallback to 0
+                var eq = Math.max(1, options.equipment|0);
+                return c.averageProfit / eq;
+            }
+            case 0:
+            default:
+                return c.drawProfit; // current view metric
+        }
+    }
+
+    cropList.sort(function(a, b) {
+        var ka = keyFor(a) || 0;
+        var kb = keyFor(b) || 0;
+        var diff = (kb) - (ka);
+        if (diff !== 0) return diff;
+        return (a._origIndex || 0) - (b._origIndex || 0);
+    });
+    for (var j = 0; j < cropList.length; j++) delete cropList[j]._origIndex;
 
 	// console.log("==== SORTED ====");
 	for (var k = 0; k < cropList.length; k++) {
@@ -952,7 +988,7 @@ function updateScaleAxis() {
     var isROI = (options.average == 2 || options.average == 3);
     var maxAbs = 0;
     if (isROI) {
-        // Consider both ROI (green/red) and negative cost percentages (yellow)
+        // Consider both ROI (green/red) and cost bars (yellow/brown)
         var minVal = 0, maxVal = 0;
         for (var i = 0; i < cropList.length; i++) {
             var d = cropList[i];
@@ -965,14 +1001,22 @@ function updateScaleAxis() {
                 if (v > maxVal) maxVal = v;
             }
         }
-        var maxAbs = Math.max(Math.abs(minVal), Math.abs(maxVal));
-        var step = pickPercentStep(maxAbs);
-        var minLimit = Math.floor(minVal / step) * step;
-        var maxLimit = Math.ceil(maxVal / step) * step;
-        if (minLimit === maxLimit) maxLimit = minLimit + step;
-        return d3.scaleLinear()
-            .domain([minLimit, maxLimit])
-            .range([height*2, 0]);
+        if (options.roiSymmetric) {
+            maxAbs = Math.max(Math.abs(minVal), Math.abs(maxVal));
+            var step = pickPercentStep(maxAbs);
+            var limit = Math.max(step, Math.ceil(maxAbs / step) * step);
+            return d3.scaleLinear()
+                .domain([-limit, limit])
+                .range([height*2, 0]);
+        } else {
+            var step = pickPercentStep(Math.max(Math.abs(minVal), Math.abs(maxVal)));
+            var minLimit = Math.floor(minVal / step) * step;
+            var maxLimit = Math.ceil(maxVal / step) * step;
+            if (minLimit === maxLimit) maxLimit = minLimit + step;
+            return d3.scaleLinear()
+                .domain([minLimit, maxLimit])
+                .range([height*2, 0]);
+        }
     } else {
         for (var i = 0; i < cropList.length; i++) {
             var d = cropList[i];
@@ -1141,7 +1185,7 @@ function renderGraph() {
 
                 var lossArray = [0];
                 var isROI = (options.average == 2 || options.average == 3);
-                if (!isROI) {
+                if (!isROI || (isROI && options.roiCostMode == 1)) {
                     if (options.buySeed)
                         lossArray.push(d.drawSeedLoss);
                     if (options.buyFert)
@@ -1217,25 +1261,49 @@ function renderGraph() {
 				if (options.buySeed) {
 					tooltipTr = tooltipTable.append("tr");
 					tooltipTr.append("td").attr("class", "tooltipTdLeftSpace").text("种子总成本：");
-					tooltipTr.append("td").attr("class", "tooltipTdRightNeg").text(formatNumber(d.seedLoss))
-						.append("div").attr("class", "gold");
+					var seedTotalVal = d.seedLoss;
+					var seedTotalCell = tooltipTr.append("td").attr("class", "tooltipTdRightNeg");
+					if (options.average == 2 || options.average == 3) {
+						if (options.roiCostMode == 1) seedTotalCell.text(formatNumber(seedTotalVal)).append("div").attr("class", "gold");
+						else seedTotalCell.text(((seedTotalVal && d.seedLoss + d.fertLoss !== 0) ? Math.round(Math.max(0, -seedTotalVal) / Math.max(1, -(d.seedLoss + d.fertLoss)) * 100) : 0) + "%");
+					} else {
+						seedTotalCell.text(formatNumber(seedTotalVal)).append("div").attr("class", "gold");
+					}
 
 					tooltipTr = tooltipTable.append("tr");
 					tooltipTr.append("td").attr("class", "tooltipTdLeft").text("种子每日成本：");
-					tooltipTr.append("td").attr("class", "tooltipTdRightNeg").text(formatNumber(d.averageSeedLoss))
-						.append("div").attr("class", "gold");
+					var seedDailyVal = d.averageSeedLoss;
+					var seedDailyCell = tooltipTr.append("td").attr("class", "tooltipTdRightNeg");
+					if (options.average == 2 || options.average == 3) {
+						if (options.roiCostMode == 1) seedDailyCell.text(formatNumber(seedDailyVal)).append("div").attr("class", "gold");
+						else seedDailyCell.text(((d.seedLoss + d.fertLoss !== 0) ? Math.round(Math.max(0, -d.seedLoss) / Math.max(1, -(d.seedLoss + d.fertLoss)) * 100 / (Math.max(1, (d.growth && d.growth.regrow == 0) ? d.growth.initial : options.days))) : 0) + "%");
+					} else {
+						seedDailyCell.text(formatNumber(seedDailyVal)).append("div").attr("class", "gold");
+					}
 				}
 
 				if (options.buyFert) {
 					tooltipTr = tooltipTable.append("tr");
 					tooltipTr.append("td").attr("class", "tooltipTdLeftSpace").text("肥料总成本：");
-					tooltipTr.append("td").attr("class", "tooltipTdRightNeg").text(formatNumber(d.fertLoss))
-						.append("div").attr("class", "gold");
+					var fertTotalVal = d.fertLoss;
+					var fertTotalCell = tooltipTr.append("td").attr("class", "tooltipTdRightNeg");
+					if (options.average == 2 || options.average == 3) {
+						if (options.roiCostMode == 1) fertTotalCell.text(formatNumber(fertTotalVal)).append("div").attr("class", "gold");
+						else fertTotalCell.text(((d.seedLoss + d.fertLoss !== 0) ? Math.round(Math.max(0, -fertTotalVal) / Math.max(1, -(d.seedLoss + d.fertLoss)) * 100) : 0) + "%");
+					} else {
+						fertTotalCell.text(formatNumber(fertTotalVal)).append("div").attr("class", "gold");
+					}
 
 					tooltipTr = tooltipTable.append("tr");
 					tooltipTr.append("td").attr("class", "tooltipTdLeft").text("肥料每日成本：");
-					tooltipTr.append("td").attr("class", "tooltipTdRightNeg").text(formatNumber(d.averageFertLoss))
-						.append("div").attr("class", "gold");
+					var fertDailyVal = d.averageFertLoss;
+					var fertDailyCell = tooltipTr.append("td").attr("class", "tooltipTdRightNeg");
+					if (options.average == 2 || options.average == 3) {
+						if (options.roiCostMode == 1) fertDailyCell.text(formatNumber(fertDailyVal)).append("div").attr("class", "gold");
+						else fertDailyCell.text(((d.seedLoss + d.fertLoss !== 0) ? Math.round(Math.max(0, -d.fertLoss) / Math.max(1, -(d.seedLoss + d.fertLoss)) * 100 / (Math.max(1, (d.growth && d.growth.regrow == 0) ? d.growth.initial : options.days))) : 0) + "%");
+					} else {
+						fertDailyCell.text(formatNumber(fertDailyVal)).append("div").attr("class", "gold");
+					}
 				}
 
 
@@ -1688,7 +1756,7 @@ function updateData() {
     options.season = parseInt(document.getElementById('select_season').value);
     const isGreenhouse = options.season == 4;
 
-	options.produce = parseInt(document.getElementById('select_produce').value);
+    options.produce = parseInt(document.getElementById('select_produce').value);
 
 	var tr_equipmentID = document.getElementById('tr_equipment');
 	var tr_check_sellRawID = document.getElementById('tr_check_sellRaw');
@@ -1755,7 +1823,14 @@ function updateData() {
 		options.maxSeedMoney = 0;
 	}
 
-	options.average = parseInt(document.getElementById('select_profit_display').value);
+    options.average = parseInt(document.getElementById('select_profit_display').value);
+
+    // Toggle ROI-only UI rows now, so they animate on selection change too
+    var isROI_now = (options.average == 2 || options.average == 3);
+    var trRoiAxis_now = document.getElementById('tr_roi_axis');
+    var trRoiCost_now = document.getElementById('tr_roi_costmode');
+    if (trRoiAxis_now) trRoiAxis_now.classList.toggle('hidden', !isROI_now);
+    if (trRoiCost_now) trRoiCost_now.classList.toggle('hidden', !isROI_now);
     
     options.crossSeason = document.getElementById('cross_season').checked;
 
@@ -1798,7 +1873,7 @@ function updateData() {
 	options.seeds.joja = document.getElementById('check_seedsJoja').checked;
 	options.seeds.special = document.getElementById('check_seedsSpecial').checked;
 
-	// Joja会员选项仅在选择“Joja超市”为种子来源时显示
+	// Joja会员选项仅在选择"Joja超市"为种子来源时显示
 	var trJoja = document.getElementById('tr_joja_member');
 	if (trJoja) {
 		if (options.seeds.joja && options.buySeed) trJoja.classList.remove('hidden');
@@ -1829,7 +1904,19 @@ function updateData() {
 
 	options.fertilizer = parseInt(document.getElementById('select_fertilizer').value);
 
-	options.buyFert = document.getElementById('check_buyFert').checked;
+    options.buyFert = document.getElementById('check_buyFert').checked;
+
+    // ROI specific controls visibility and values
+    var isROI = (options.average == 2 || options.average == 3);
+    var trRoiAxis = document.getElementById('tr_roi_axis');
+    var trRoiCost = document.getElementById('tr_roi_costmode');
+    if (trRoiAxis) trRoiAxis.classList.toggle('hidden', !isROI);
+    if (trRoiCost) trRoiCost.classList.toggle('hidden', !isROI);
+    options.roiSymmetric = !!(document.getElementById('check_roi_symmetric') && document.getElementById('check_roi_symmetric').checked);
+    options.roiCostMode = parseInt((document.getElementById('select_roi_costmode') && document.getElementById('select_roi_costmode').value) || 0);
+
+    // Sorting mode
+    options.sortMode = parseInt((document.getElementById('select_sort') && document.getElementById('select_sort').value) || 0);
 	
 	options.fertilizerSource = parseInt(document.getElementById('speed_gro_source').value);
 
@@ -1982,8 +2069,8 @@ function optionsLoad() {
     options.maxSeedMoney = validIntRange(0, MAX_INT, options.maxSeedMoney);
     document.getElementById('max_seed_money').value = options.maxSeedMoney;
 
-	options.average = validIntRange(0,3,options.average);
-	document.getElementById('select_profit_display').checked = options.average;
+    options.average = validIntRange(0,3,options.average);
+    document.getElementById('select_profit_display').value = options.average;
 
     options.crossSeason = validBoolean(options.crossSeason);
     document.getElementById('cross_season').checked = options.crossSeason;
@@ -2035,6 +2122,19 @@ function optionsLoad() {
 
 	options.buyFert = validBoolean(options.buyFert);
 	document.getElementById('check_buyFert').checked = options.buyFert;
+
+    // ROI controls
+    options.roiSymmetric = validBoolean(options.roiSymmetric);
+    var elSym = document.getElementById('check_roi_symmetric');
+    if (elSym) elSym.checked = options.roiSymmetric;
+    options.roiCostMode = validIntRange(0, 1, options.roiCostMode);
+    var elCost = document.getElementById('select_roi_costmode');
+    if (elCost) elCost.value = options.roiCostMode;
+
+    // Sort mode
+    options.sortMode = validIntRange(0, 6, options.sortMode);
+    var elSort = document.getElementById('select_sort');
+    if (elSort) elSort.value = options.sortMode;
 
 	options.level = validIntRange(0, 13, options.level);
 	document.getElementById('farming_level').value = options.level;
