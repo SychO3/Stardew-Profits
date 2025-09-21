@@ -298,7 +298,15 @@ function minSeedCost(crop) {
 
 	// Pierre and Joja (if present)
 	if (crop.seeds && options.seeds.pierre) consider(crop.seeds.pierre);
-	if (crop.seeds && options.seeds.joja) consider(crop.seeds.joja);
+	if (crop.seeds && options.seeds.joja) {
+		var jojaPrice = crop.seeds.joja;
+		if (options.jojaMember && typeof jojaPrice === 'number' && jojaPrice > 0) {
+			// 会员不再加价：已在生成时近似为非会员价，取 Pierre 等价估算
+			consider(jojaPrice / 1.25);
+		} else {
+			consider(jojaPrice);
+		}
+	}
 
 	// Special sources: Oasis, Island Trader, Travelling Cart
 	if (crop.seeds && options.seeds.special) {
@@ -1790,6 +1798,13 @@ function updateData() {
 	options.seeds.joja = document.getElementById('check_seedsJoja').checked;
 	options.seeds.special = document.getElementById('check_seedsSpecial').checked;
 
+	// Joja会员选项仅在选择“Joja超市”为种子来源时显示
+	var trJoja = document.getElementById('tr_joja_member');
+	if (trJoja) {
+		if (options.seeds.joja && options.buySeed) trJoja.classList.remove('hidden');
+		else trJoja.classList.add('hidden');
+	}
+
 	options.buySeed = document.getElementById('check_buySeed').checked;
 
     options.replant = document.getElementById('check_replant').checked;
@@ -1892,7 +1907,8 @@ function updateData() {
 	else
 		document.getElementById('speed_gro_source').disabled = true;
 
-	options.extra = document.getElementById('check_extra').checked;
+    options.extra = document.getElementById('check_extra').checked;
+    options.jojaMember = !!(document.getElementById('check_joja_member') && document.getElementById('check_joja_member').checked);
 	options.disableLinks = document.getElementById('disable_links').checked;
 
     updateSeasonNames();
@@ -2046,8 +2062,15 @@ function optionsLoad() {
 	options.extra = validBoolean(options.extra);
 	document.getElementById('check_extra').checked = options.extra;
 
-	options.disableLinks = validBoolean(options.disableLinks);
+    options.disableLinks = validBoolean(options.disableLinks);
 	document.getElementById('disable_links').checked = options.disableLinks;
+
+    // optional: joja member toggle may not exist on older pages
+    try {
+        options.jojaMember = validBoolean(options.jojaMember);
+        var el = document.getElementById('check_joja_member');
+        if (el) el.checked = options.jojaMember;
+    } catch (e) {}
 
     updateSeasonNames();
 }
@@ -2072,7 +2095,7 @@ function serialize(obj) {
 		.reduce((acc, key) => {
 			return /^(?:true|false|\d+)$/i.test('' + obj[key])
 				? `${acc}-${key}_${obj[key]}`
-				: `${acc}-${key}_(${serialize(obj[key])})`;
+			: `${acc}-${key}_(${serialize(obj[key])})`;
 		}, '')
 		.slice(1);
 }
