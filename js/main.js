@@ -55,6 +55,8 @@ var imgIcons;
 var barsTooltips;
 var options;
 var MAX_INT = Number.MAX_SAFE_INTEGER || Number.MAX_VALUE;
+// Snapshot defaults from data.js for compact URL-diff encoding
+var defaultOptions = JSON.parse(JSON.stringify(options));
 
 // Known forage-only items when crops.js doesn't mark `isWildseed`.
 // Do NOT edit crops.js (auto-generated); infer here by crop key.
@@ -2000,8 +2002,8 @@ function updateData() {
 
     updateSeasonNames();
 
-	// Persist the options object into the URL hash.
-	window.location.hash = encodeURIComponent(serialize(options));
+    // Persist the options object into the URL hash (compact form)
+    saveOptions();
 
 	fetchCrops();
 	valueCrops();
@@ -2030,9 +2032,15 @@ function refresh() {
  * Parse out and validate the options from the URL hash.
  */
 function optionsLoad() {
-	if (!window.location.hash) return;
+    if (!window.location.hash) return;
 
-	options = deserialize(window.location.hash.slice(1));
+    var raw = window.location.hash.slice(1);
+    if (raw.charAt(0) === '!') {
+        // New compact format
+        options = deserializeCompact(raw.slice(1));
+    } else {
+        options = deserialize(raw);
+    }
 
 	function validBoolean(q) {
 		return q == 1;
@@ -2198,6 +2206,113 @@ function serialize(obj) {
 			: `${acc}-${key}_(${serialize(obj[key])})`;
 		}, '')
 		.slice(1);
+}
+
+// ---- Compact URL encoding (diff from defaults) ----
+function serializeCompact(opt) {
+    try {
+        var short = {
+            produce: 'p', equipment: 'e', sellRaw: 'sr', sellExcess: 'se', aging: 'ag', planted: 'pl',
+            maxSeedMoney: 'ms', days: 'd', fertilizer: 'f', level: 'l', season: 's', buySeed: 'bs',
+            replant: 'rp', nextyear: 'ny', buyFert: 'bf', average: 'av', fertilizerSource: 'fs',
+            foodIndex: 'fi', foodLevel: 'fl', extra: 'ex', disableLinks: 'dl', byHarvest: 'bh',
+            crossSeason: 'cs', foragingLevel: 'fg', jojaMember: 'jm', roiSymmetric: 'rs',
+            roiCostMode: 'rc', sortMode: 'sm'
+        };
+
+        function bool(v) { return v ? '1' : '0'; }
+        function pushIfDiff(pairs, key, value) {
+            var defVal = defaultOptions[key];
+            if (typeof defVal === 'object') return;
+            if (value !== defVal) pairs.push(short[key] + '=' + value);
+        }
+
+        var pairs = [];
+        // flat fields
+        for (var k in short) {
+            if (!short.hasOwnProperty(k)) continue;
+            var v = opt[k];
+            if (typeof v === 'boolean') pushIfDiff(pairs, k, bool(v));
+            else if (typeof v === 'number' || typeof v === 'string') pushIfDiff(pairs, k, v);
+        }
+
+        // seeds bitset
+        var sdDef = (defaultOptions.seeds.pierre?1:0) | (defaultOptions.seeds.joja?2:0) | (defaultOptions.seeds.special?4:0);
+        var sdNow = (opt.seeds.pierre?1:0) | (opt.seeds.joja?2:0) | (opt.seeds.special?4:0);
+        if (sdNow !== sdDef) pairs.push('sd=' + sdNow);
+
+        // skills bitset
+        var skDef = (defaultOptions.skills.till?1:0) | (defaultOptions.skills.agri?2:0) | (defaultOptions.skills.arti?4:0)
+                  | (defaultOptions.skills.gatherer?8:0) | (defaultOptions.skills.botanist?16:0);
+        var skNow = (opt.skills.till?1:0) | (opt.skills.agri?2:0) | (opt.skills.arti?4:0)
+                  | (opt.skills.gatherer?8:0) | (opt.skills.botanist?16:0);
+        if (skNow !== skDef) pairs.push('sk=' + skNow);
+
+        // Prefix with version marker '!'
+        return '!' + pairs.join('&');
+    } catch (e) {
+        // Fallback to old verbose format on any unexpected issue
+        return encodeURIComponent(serialize(opt));
+    }
+}
+
+function deserializeCompact(str) {
+    // str is without the leading '!'
+    var result = JSON.parse(JSON.stringify(defaultOptions));
+    if (!str) return result;
+    var parts = str.split('&');
+    var long = {
+        p: 'produce', e: 'equipment', sr: 'sellRaw', se: 'sellExcess', ag: 'aging', pl: 'planted',
+        ms: 'maxSeedMoney', d: 'days', f: 'fertilizer', l: 'level', s: 'season', bs: 'buySeed',
+        rp: 'replant', ny: 'nextyear', bf: 'buyFert', av: 'average', fs: 'fertilizerSource',
+        fi: 'foodIndex', fl: 'foodLevel', ex: 'extra', dl: 'disableLinks', bh: 'byHarvest',
+        cs: 'crossSeason', fg: 'foragingLevel', jm: 'jojaMember', rs: 'roiSymmetric',
+        rc: 'roiCostMode', sm: 'sortMode'
+    };
+
+    function asBool(v) { return v === '1'; }
+
+    for (var i = 0; i < parts.length; i++) {
+        var kv = parts[i].split('=');
+        if (kv.length !== 2) continue;
+        var k = kv[0];
+        var v = kv[1];
+        if (k === 'sd') {
+            var n = parseInt(v, 10) || 0;
+            result.seeds.pierre = !!(n & 1);
+            result.seeds.joja = !!(n & 2);
+            result.seeds.special = !!(n & 4);
+            continue;
+        }
+        if (k === 'sk') {
+            var m = parseInt(v, 10) || 0;
+            result.skills.till = !!(m & 1);
+            result.skills.agri = !!(m & 2);
+            result.skills.arti = !!(m & 4);
+            result.skills.gatherer = !!(m & 8);
+            result.skills.botanist = !!(m & 16);
+            continue;
+        }
+        var full = long[k];
+        if (!full) continue;
+        if (typeof defaultOptions[full] === 'boolean') result[full] = asBool(v);
+        else result[full] = parseInt(v, 10);
+    }
+    return result;
+}
+
+function saveOptions() {
+    try {
+        var compact = serializeCompact(options);
+        // If compact is non-empty and marked, use directly; else fallback
+        if (compact && compact.charAt(0) === '!') {
+            window.location.hash = compact;
+        } else {
+            window.location.hash = encodeURIComponent(serialize(options));
+        }
+    } catch (e) {
+        window.location.hash = encodeURIComponent(serialize(options));
+    }
 }
 
 /*
