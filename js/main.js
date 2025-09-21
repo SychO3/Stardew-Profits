@@ -55,6 +55,65 @@ var imgIcons;
 var barsTooltips;
 var options;
 var MAX_INT = Number.MAX_SAFE_INTEGER || Number.MAX_VALUE;
+// Debounced scheduling to avoid frequent heavy reflows while typing
+var _refreshTimer = null;
+var _rebuildTimer = null;
+function scheduleRefresh() {
+    if (_refreshTimer) clearTimeout(_refreshTimer);
+    _refreshTimer = setTimeout(function() {
+        _refreshTimer = null;
+        refresh();
+    }, 120);
+}
+function scheduleRebuild() {
+    if (_rebuildTimer) clearTimeout(_rebuildTimer);
+    _rebuildTimer = setTimeout(function() {
+        _rebuildTimer = null;
+        rebuild();
+    }, 150);
+}
+function onNumberKeyDown(event) {
+    if (event && (event.key === 'Enter' || event.keyCode === 13)) {
+        try { event.target && event.target.blur && event.target.blur(); } catch (e) {}
+        scheduleRefresh();
+    }
+}
+var SMALL_INPUT_IMMEDIATE_THRESHOLD = 50;
+function onNumberInput(event) {
+    try {
+        var v = parseInt(event && event.target && event.target.value, 10);
+        if (!isNaN(v) && v <= SMALL_INPUT_IMMEDIATE_THRESHOLD) {
+            scheduleRefresh();
+        }
+    } catch (e) {}
+}
+// UI caps to prevent excessive values causing performance or layout issues
+var UI_CAPS = {
+    CURRENT_DAY_MAX: 56,           // for non-greenhouse; greenhouse uses number_days directly
+    DAYS_MAX_GREENHOUSE: 3650,     // hard cap for greenhouse days input
+    PLANTED_MAX: 5000,             // upper bound for planted count
+    EQUIPMENT_MAX: 2000,           // upper bound for processing equipment
+    SEED_MONEY_MAX: 100000000,     // budget cap
+    LEVEL_MAX: 13                  // farming/foraging levels
+};
+
+// Disable animations when numbers are large to avoid jank
+var ANIM_DISABLE_THRESHOLD = 500;
+function isLargeScenario() {
+    try {
+        return (parseInt(options && options.planted, 10) >= ANIM_DISABLE_THRESHOLD)
+            || (parseInt(options && options.days, 10) >= ANIM_DISABLE_THRESHOLD)
+            || (parseInt(options && options.equipment, 10) >= ANIM_DISABLE_THRESHOLD);
+    } catch (e) { return false; }
+}
+
+function clampInt(min, max, v) {
+    var n = parseInt(v, 10);
+    if (isNaN(n)) n = min;
+    if (n < min) n = min;
+    if (n > max) n = max;
+    return n;
+}
 // Snapshot defaults from data.js for compact URL-diff encoding
 var defaultOptions = JSON.parse(JSON.stringify(options));
 
@@ -1590,8 +1649,9 @@ function updateGraph() {
                 .tickValues(isROI ? makePercentTicks(ax) : makeAdaptiveTicks(ax))
                 .tickFormat(isROI ? function(d){ return d + '%'; } : formatK);
 
-	axisY.transition()
-		.call(yAxis);
+    var selAxisY = axisY;
+    if (isLargeScenario()) selAxisY = axisY; // keep reference
+    (isLargeScenario() ? selAxisY : axisY.transition()).call(yAxis);
 
     title = gTitle.attr("class", "Title")
     .append("text")
@@ -1601,8 +1661,8 @@ function updateGraph() {
     .style("text-anchor", "start")
     .text(graphDescription);
 
-	barsProfit.data(cropList)
-		.transition()
+    var barsProfitSel = barsProfit.data(cropList);
+    (isLargeScenario() ? barsProfitSel : barsProfitSel.transition())
 			.attr("x", function(d, i) {
 				if (d.drawProfit < 0 && options.buySeed && options.buyFert)
 					return x(i) + barOffsetX + (barWidth / miniBar) * 2;
@@ -1642,8 +1702,8 @@ function updateGraph() {
  					return "red";
  			});
 
-    barsSeed.data(cropList)
-        .transition()
+    var barsSeedSel = barsSeed.data(cropList);
+    (isLargeScenario() ? barsSeedSel : barsSeedSel.transition())
             .attr("x", function(d, i) { return x(i) + barOffsetX; })
             .attr("y", height + barOffsetY)
             .attr("height", function(d) {
@@ -1655,8 +1715,8 @@ function updateGraph() {
             .attr("width", barWidth / miniBar)
             .attr("fill", "orange");
 
-    barsFert.data(cropList)
-        .transition()
+    var barsFertSel = barsFert.data(cropList);
+    (isLargeScenario() ? barsFertSel : barsFertSel.transition())
             .attr("x", function(d, i) {
                 if (options.buySeed)
                     return x(i) + barOffsetX + barWidth / miniBar;
@@ -1673,8 +1733,8 @@ function updateGraph() {
             .attr("width", barWidth / miniBar)
             .attr("fill", "brown");
 
- 	imgIcons.data(cropList)
-		.transition()
+    var imgIconsSel = imgIcons.data(cropList);
+    (isLargeScenario() ? imgIconsSel : imgIconsSel.transition())
 			.attr("x", function(d, i) { return x(i) + barOffsetX; })
 			.attr("y", function(d) {
 				if (d.drawProfit >= 0)
@@ -1686,8 +1746,8 @@ function updateGraph() {
 		    .attr('height', barWidth)
 		    .attr("href", function(d) { return "img/" + d.img; });
 
-	barsTooltips.data(cropList)
-		.transition()
+    var barsTooltipsSel = barsTooltips.data(cropList);
+    (isLargeScenario() ? barsTooltipsSel : barsTooltipsSel.transition())
 			.attr("x", function(d, i) { return x(i) + barOffsetX - barPadding/2; })
 			.attr("y", function(d) {
 				if (d.drawProfit >= 0)
@@ -1845,10 +1905,11 @@ function updateData() {
 
         if (document.getElementById('current_day').value <= 0)
             document.getElementById('current_day').value = 1;
+        // Clamp current day to UI cap (28 or 56 based on crossSeason)
         if (options.crossSeason) {
             document.getElementById('number_days').value = 56;
-            if (document.getElementById('current_day').value > 56)
-                document.getElementById('current_day').value = 56;
+            if (document.getElementById('current_day').value > UI_CAPS.CURRENT_DAY_MAX)
+                document.getElementById('current_day').value = UI_CAPS.CURRENT_DAY_MAX;
             options.days = 57 - document.getElementById('current_day').value;
         }
         else {
@@ -1866,8 +1927,8 @@ function updateData() {
         
         document.getElementById('current_day').value = 1;
 
-        if (document.getElementById('number_days').value > 100000)
-            document.getElementById('number_days').value = 100000;
+        // Clamp greenhouse days
+        document.getElementById('number_days').value = clampInt(1, UI_CAPS.DAYS_MAX_GREENHOUSE, document.getElementById('number_days').value);
         options.days = document.getElementById('number_days').value;
     }
 
@@ -1901,8 +1962,14 @@ function updateData() {
         document.getElementById('number_planted').value = 1;
     if (options.replant && parseInt(document.getElementById('number_planted').value) % 2 == 1)
         document.getElementById('number_planted').value = parseInt(document.getElementById('number_planted').value) + 1;
+    // Clamp planted and equipment and seed money to reasonable UI caps
+    document.getElementById('number_planted').value = clampInt(1, UI_CAPS.PLANTED_MAX, document.getElementById('number_planted').value);
+    document.getElementById('equipment').value = clampInt(0, UI_CAPS.EQUIPMENT_MAX, document.getElementById('equipment').value);
+    document.getElementById('max_seed_money').value = clampInt(0, UI_CAPS.SEED_MONEY_MAX, document.getElementById('max_seed_money').value);
 
-    options.planted = document.getElementById('number_planted').value;
+    options.planted = parseInt(document.getElementById('number_planted').value, 10);
+    options.equipment = parseInt(document.getElementById('equipment').value, 10);
+    options.maxSeedMoney = parseInt(document.getElementById('max_seed_money').value, 10);
 
 	options.fertilizer = parseInt(document.getElementById('select_fertilizer').value);
 
@@ -1922,10 +1989,10 @@ function updateData() {
 	
 	options.fertilizerSource = parseInt(document.getElementById('speed_gro_source').value);
 
-	if (document.getElementById('farming_level').value <= 0)
-		document.getElementById('farming_level').value = 0;
-	if (document.getElementById('farming_level').value > 13)
-		document.getElementById('farming_level').value = 13;
+    if (document.getElementById('farming_level').value <= 0)
+        document.getElementById('farming_level').value = 0;
+    if (document.getElementById('farming_level').value > UI_CAPS.LEVEL_MAX)
+        document.getElementById('farming_level').value = UI_CAPS.LEVEL_MAX;
 	options.level = parseInt(document.getElementById('farming_level').value);
 
 	if (options.level >= 5) {
@@ -1963,8 +2030,8 @@ function updateData() {
 
     if (document.getElementById('foraging_level').value <= 0)
         document.getElementById('foraging_level').value = 0;
-    if (document.getElementById('foraging_level').value > 13)
-        document.getElementById('foraging_level').value = 13;
+    if (document.getElementById('foraging_level').value > UI_CAPS.LEVEL_MAX)
+        document.getElementById('foraging_level').value = UI_CAPS.LEVEL_MAX;
     options.foragingLevel = parseInt(document.getElementById('foraging_level').value);
 
     if (options.foragingLevel >= 5) {
@@ -2056,7 +2123,7 @@ function optionsLoad() {
 	options.produce = validIntRange(0, 4, options.produce);
 	document.getElementById('select_produce').value = options.produce;
 
-    options.equipment = validIntRange(0, MAX_INT, options.equipment);
+    options.equipment = validIntRange(0, Math.min(MAX_INT, UI_CAPS.EQUIPMENT_MAX), options.equipment);
     document.getElementById('equipment').value = options.equipment;
 
     options.sellRaw = validBoolean(options.sellRaw);
@@ -2071,10 +2138,10 @@ function optionsLoad() {
     options.aging = validIntRange(0, 3, options.aging);
     document.getElementById('select_aging').value = options.aging;
 
-	options.planted = validIntRange(1, MAX_INT, options.planted);
+    options.planted = validIntRange(1, Math.min(MAX_INT, UI_CAPS.PLANTED_MAX), options.planted);
 	document.getElementById('number_planted').value = options.planted;
 
-    options.maxSeedMoney = validIntRange(0, MAX_INT, options.maxSeedMoney);
+    options.maxSeedMoney = validIntRange(0, Math.min(MAX_INT, UI_CAPS.SEED_MONEY_MAX), options.maxSeedMoney);
     document.getElementById('max_seed_money').value = options.maxSeedMoney;
 
     options.average = validIntRange(0,3,options.average);
@@ -2085,9 +2152,9 @@ function optionsLoad() {
 
     var daysMax = 0;
     if (options.crossSeason)
-        daysMax = options.season === 4 ? MAX_INT : 56;
+        daysMax = options.season === 4 ? Math.min(MAX_INT, UI_CAPS.DAYS_MAX_GREENHOUSE) : 56;
     else
-        daysMax = options.season === 4 ? MAX_INT : 28;
+        daysMax = options.season === 4 ? Math.min(MAX_INT, UI_CAPS.DAYS_MAX_GREENHOUSE) : 28;
 
     options.days = validIntRange(1, daysMax, options.days);
     if (options.season === 4) {
