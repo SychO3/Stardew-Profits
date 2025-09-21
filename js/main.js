@@ -16,7 +16,7 @@ var cropKeyOrder = Object.keys(crops);
 var barWidth = width / Math.max(getSeasonCropKeys(GREENHOUSE_INDEX).length, 1) - barPadding;
 var miniBar = 8;
 // Leave space for the Y-axis ticks and line
-var barOffsetX = 35;
+var barOffsetX = 48;
 var barOffsetY = 40;
 var graphDescription = "收益";
 
@@ -305,9 +305,14 @@ function minSeedCost(crop) {
 		considerMaybeRange(crop.seeds["Oasis"]);
 		considerMaybeRange(crop.seeds["Island Trader"]);
 		considerMaybeRange(crop.seeds["Travelling Cart"]);
+		// Seasonal seeds可通过合成获得：用合成成本作为候选
+		considerMaybeRange(crop.seeds["craft"]);
 	}
-	    if (minSeedCost == Infinity)
-	        minSeedCost = 0;
+	    if (minSeedCost == Infinity) {
+	        // 最后兜底：使用 seeds.sell 作为估算成本，以便 ROI 不为 0
+	        considerMaybeRange(crop.seeds && crop.seeds.sell);
+	        if (minSeedCost == Infinity) minSeedCost = 0;
+	    }
 		
 		return minSeedCost;
 }
@@ -751,6 +756,15 @@ function fetchCrops() {
 		// Skip undefined or malformed entries
 		if (!crop || !crop.seeds) continue;
 
+		// Always include seasonal seed mixes and new 1.6 winter crop even if not sold in shops
+		if (cropKey === 'springseeds' || cropKey === 'summerseeds' || cropKey === 'fallseeds' || cropKey === 'winterseeds' || cropKey === 'powdermelon') {
+			var cc = JSON.parse(JSON.stringify(crop));
+			// Ensure wildseed handling (uses foraging level/skills) for seasonal mixes
+			if (cropKey !== 'powdermelon') cc.isWildseed = true;
+			cropList.push(cc);
+			continue;
+		}
+
 		var hasPierre = options.seeds.pierre && crop.seeds.pierre && crop.seeds.pierre != 0;
 		var hasJoja = options.seeds.joja && crop.seeds.joja && crop.seeds.joja != 0;
 		var hasSpecial = false;
@@ -764,7 +778,12 @@ function fetchCrops() {
 				|| (typeof cart === 'string' && cart.length > 0);
 		}
 
-        if (hasPierre || hasJoja || hasSpecial) {
+		// 展示条件：任一来源可购买，或有合成成本，或有 seeds.sell 定价
+		var hasAnyPrice = hasPierre || hasJoja || hasSpecial
+			|| (typeof crop.seeds.craft === 'number' && crop.seeds.craft > 0)
+			|| (typeof crop.seeds.sell === 'number' && crop.seeds.sell > 0);
+
+		if (hasAnyPrice) {
             var c = JSON.parse(JSON.stringify(crop));
             // Infer wildseed flag if missing, based on known foraging items.
             if (c.isWildseed !== true && FORAGING_KEYS[cropKey] === true) {
@@ -849,23 +868,18 @@ function valueCrops() {
  * Sorts the cropList array, so that the most profitable crop is the first one.
  */
 function sortCrops() {
-	var swapped;
-    do {
-        swapped = false;
-        for (var i = 0; i < cropList.length - 1; i++) {
-            if (cropList[i].drawProfit < cropList[i + 1].drawProfit) {
-                var temp = cropList[i];
-                cropList[i] = cropList[i + 1];
-                cropList[i + 1] = temp;
-                swapped = true;
-            }
-        }
-    } while (swapped);
-
+	// Stable sort by drawProfit (desc). Use original index as a tiebreaker.
+	for (var i = 0; i < cropList.length; i++) cropList[i]._origIndex = i;
+	cropList.sort(function(a, b) {
+		var diff = (b.drawProfit || 0) - (a.drawProfit || 0);
+		if (diff !== 0) return diff;
+		return (a._origIndex || 0) - (b._origIndex || 0);
+	});
+	for (var j = 0; j < cropList.length; j++) delete cropList[j]._origIndex;
 
 	// console.log("==== SORTED ====");
-	for (var i = 0; i < cropList.length; i++) {
-		// console.log(cropList[i].drawProfit.toFixed(2) + "  " + cropList[i].name);
+	for (var k = 0; k < cropList.length; k++) {
+		// console.log(cropList[k].drawProfit.toFixed(2) + "  " + cropList[k].name);
 	}
 }
 

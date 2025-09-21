@@ -1,7 +1,3 @@
-/*
- * All data gathered from a modified version of polarstoat/stardew-crop-data
- */
-// Crop List
 var crops = {
   "parsnip": {
     "name": "防风草",
@@ -1352,5 +1348,117 @@ var crops = {
       "kegType": "果酒",
       "dehydratorType": "果干"
     }
+  },
+  "springseeds": {
+    "name": "春季种子",
+    "url": "https://zh.stardewvalleywiki.com/春季种子",
+    "img": "springseeds.png",
+    "greenhouse": true,
+    "seasons": "春季",
+    "seeds": {
+      "sell": 35,
+      "pierre": 0,
+      "joja": 0,
+      "Oasis": 0,
+      "Island Trader": 0,
+      "Travelling Cart": 0
+    },
+    "growth": {
+      "initial": 7,
+      "regrow": 0
+    },
+    "produce": {
+      "extra": 0,
+      "extraPerc": 0.0,
+      "price": 45,
+      "jarType": null,
+      "kegType": null,
+      "dehydratorType": null
+    },
+    "isWildseed": true
+  },
+  "summerseeds": {
+    "name": "夏季种子",
+    "url": "https://zh.stardewvalleywiki.com/夏季种子",
+    "img": "summerseeds.png",
+    "greenhouse": true,
+    "seasons": "夏季",
+    "seeds": {
+      "sell": 55,
+      "pierre": 0,
+      "joja": 0,
+      "Oasis": 0,
+      "Island Trader": 0,
+      "Travelling Cart": 0
+    },
+    "growth": {
+      "initial": 7,
+      "regrow": 0
+    },
+    "produce": {
+      "extra": 0,
+      "extraPerc": 0.0,
+      "price": 70,
+      "jarType": null,
+      "kegType": null,
+      "dehydratorType": null
+    },
+    "isWildseed": true
+  },
+  "fallseeds": {
+    "name": "秋季种子",
+    "url": "https://zh.stardewvalleywiki.com/秋季种子",
+    "img": "fallseeds.png",
+    "greenhouse": true,
+    "seasons": "秋季",
+    "seeds": {
+      "sell": 45,
+      "pierre": 0,
+      "joja": 0,
+      "Oasis": 0,
+      "Island Trader": 0,
+      "Travelling Cart": 0
+    },
+    "growth": {
+      "initial": 7,
+      "regrow": 0
+    },
+    "produce": {
+      "extra": 0,
+      "extraPerc": 0.0,
+      "price": 58,
+      "jarType": null,
+      "kegType": null,
+      "dehydratorType": null
+    },
+    "isWildseed": true
+  },
+  "winterseeds": {
+    "name": "冬季种子",
+    "url": "https://zh.stardewvalleywiki.com/冬季种子",
+    "img": "winterseeds.png",
+    "greenhouse": true,
+    "seasons": "冬季",
+    "seeds": {
+      "sell": 30,
+      "pierre": 0,
+      "joja": 0,
+      "Oasis": 0,
+      "Island Trader": 0,
+      "Travelling Cart": 0
+    },
+    "growth": {
+      "initial": 7,
+      "regrow": 0
+    },
+    "produce": {
+      "extra": 0,
+      "extraPerc": 0.0,
+      "price": 95,
+      "jarType": null,
+      "kegType": null,
+      "dehydratorType": null
+    },
+    "isWildseed": true
   }
 }

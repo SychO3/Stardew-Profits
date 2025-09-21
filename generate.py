@@ -614,6 +614,110 @@ def generate_all():
         except Exception as e:
             print(f"Failed to build entry for seed {seed_id}: {e}")
 
+    # Add explicit seasonal seeds as standalone entries (spring/summer/fall/winter seeds)
+    try:
+        def zh(key: str, fallback: str) -> str:
+            try:
+                return (zh_objects.get(key) or fallback) if isinstance(zh_objects, dict) else fallback
+            except Exception:
+                return fallback
+
+        def avg_price(ids: list[str]) -> int:
+            vals = []
+            for pid in ids:
+                try:
+                    p = int((objects.get(str(pid)) or {}).get('Price', 0) or 0)
+                    if p > 0:
+                        vals.append(p)
+                except Exception:
+                    pass
+            return int(round(sum(vals) / max(1, len(vals)))) if vals else 0
+
+        def crop_days(seed_key: str) -> tuple[int,int]:
+            c = crops.get(seed_key) or {}
+            try:
+                initial = sum(c.get('DaysInPhase') or [])
+            except Exception:
+                initial = 0
+            regrow_days = c.get('RegrowDays')
+            regrow = regrow_days if isinstance(regrow_days, int) and regrow_days >= 0 else 0
+            return initial, regrow
+
+        seasonal_specs = [
+            {
+                'key': 'springseeds',
+                'seed_id': '495',
+                'display': zh('SpringSeeds_Name', 'Spring Seeds'),
+                'img': 'springseeds.png',
+                'seasons': '春季',
+                'forage_ids': ['16', '18', '20', '22'],  # 野山葵/水仙葵/韭葱/蒲公英
+            },
+            {
+                'key': 'summerseeds',
+                'seed_id': '496',
+                'display': zh('SummerSeeds_Name', 'Summer Seeds'),
+                'img': 'summerseeds.png',
+                'seasons': '夏季',
+                'forage_ids': ['396', '398', '402'],  # 香味浆果/葡萄/香豌豆
+            },
+            {
+                'key': 'fallseeds',
+                'seed_id': '497',
+                'display': zh('FallSeeds_Name', 'Fall Seeds'),
+                'img': 'fallseeds.png',
+                'seasons': '秋季',
+                'forage_ids': ['404', '406', '408', '410'],  # 普通蘑菇/野李子/榛子/黑莓
+            },
+            {
+                'key': 'winterseeds',
+                'seed_id': '498',
+                'display': zh('WinterSeeds_Name', 'Winter Seeds'),
+                'img': 'winterseeds.png',
+                'seasons': '冬季',
+                'forage_ids': ['412', '414', '416', '418'],  # 冬根/水晶果/雪山芋/番红花
+            },
+        ]
+
+        for spec in seasonal_specs:
+            seed_obj = objects.get(spec['seed_id']) or {}
+            seed_sell = int(seed_obj.get('Price', 0) or 0)
+            initial, regrow = crop_days(spec['seed_id'])
+            # Expected raw value as simple average of the season's forage items
+            expected_price = avg_price(spec['forage_ids'])
+            craft = craft_cost(spec['forage_ids'])
+            combined[spec['key']] = {
+                'name': spec['display'],
+                'url': f"https://zh.stardewvalleywiki.com/{spec['display']}",
+                'img': spec['img'],
+                'greenhouse': True,
+                'seasons': spec['seasons'],
+                'seeds': {
+                    'sell': seed_sell,
+                    'pierre': 0,
+                    'joja': 0,
+                    'Oasis': 0,
+                    'Island Trader': 0,
+                    'Travelling Cart': 0,
+                    'craft': craft,
+                },
+                'growth': {
+                    'initial': initial,
+                    'regrow': regrow,
+                },
+                'produce': {
+                    'extra': 0,
+                    'extraPerc': 0.0,
+                    'price': expected_price,
+                    'jarType': None,
+                    'kegType': None,
+                    'dehydratorType': None,
+                },
+                # Mark as wildseed so foraging level/skills apply
+                'isWildseed': True,
+            }
+    except Exception as e:
+        print(f"Failed to append seasonal seeds: {e}")
+
     # Write combined file
     combined_path = output_dir / 'crops_by_seed.json'
     with open(combined_path, 'w', encoding='utf-8') as f:
